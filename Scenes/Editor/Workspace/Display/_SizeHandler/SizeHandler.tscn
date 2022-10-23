@@ -1,0 +1,115 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Editor/Workspace/Display/_SizeHandler/size_handler.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Editor/Workspace/Display/_SizeHandler/grabber.gd" type="Script" id=2]
+
+[node name="SizeHandler" type="GridContainer"]
+margin_right = 240.0
+margin_bottom = 320.0
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+script = ExtResource( 1 )
+
+[node name="TopLeft" type="ColorRect" parent="."]
+margin_right = 4.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 4, 4 )
+mouse_default_cursor_shape = 12
+color = Color( 1, 0, 0.631373, 1 )
+script = ExtResource( 2 )
+id = 1
+
+[node name="Top" type="ColorRect" parent="."]
+margin_left = 4.0
+margin_right = 236.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 3, 3 )
+mouse_default_cursor_shape = 9
+size_flags_horizontal = 3
+color = Color( 0, 1, 0.0156863, 1 )
+script = ExtResource( 2 )
+id = 2
+
+[node name="TopRight" type="ColorRect" parent="."]
+margin_left = 236.0
+margin_right = 240.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 4, 4 )
+mouse_default_cursor_shape = 11
+color = Color( 1, 0, 0.631373, 1 )
+script = ExtResource( 2 )
+id = 3
+
+[node name="Left" type="ColorRect" parent="."]
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = 316.0
+rect_min_size = Vector2( 3, 3 )
+mouse_default_cursor_shape = 10
+size_flags_vertical = 3
+color = Color( 0, 1, 0.0156863, 1 )
+script = ExtResource( 2 )
+id = 4
+
+[node name="Middle" type="ColorRect" parent="."]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 236.0
+margin_bottom = 316.0
+rect_min_size = Vector2( 100, 100 )
+size_flags_vertical = 3
+color = Color( 1, 1, 1, 0 )
+
+[node name="Right" type="ColorRect" parent="."]
+margin_left = 236.0
+margin_top = 4.0
+margin_right = 240.0
+margin_bottom = 316.0
+rect_min_size = Vector2( 3, 3 )
+mouse_default_cursor_shape = 10
+size_flags_vertical = 3
+color = Color( 0, 1, 0.0156863, 1 )
+script = ExtResource( 2 )
+id = 5
+
+[node name="BottomLeft" type="ColorRect" parent="."]
+margin_top = 316.0
+margin_right = 4.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 4, 4 )
+mouse_default_cursor_shape = 11
+color = Color( 1, 0, 0.631373, 1 )
+script = ExtResource( 2 )
+id = 6
+
+[node name="Bottom" type="ColorRect" parent="."]
+margin_left = 4.0
+margin_top = 316.0
+margin_right = 236.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 3, 3 )
+mouse_default_cursor_shape = 9
+color = Color( 0, 1, 0.0156863, 1 )
+script = ExtResource( 2 )
+id = 7
+
+[node name="BottomRight" type="ColorRect" parent="."]
+margin_left = 236.0
+margin_top = 316.0
+margin_right = 240.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 4, 4 )
+mouse_default_cursor_shape = 12
+color = Color( 1, 0, 0.631373, 1 )
+script = ExtResource( 2 )
+id = 8
+
+[connection signal="pressed" from="TopLeft" to="." method="_on_grabber_pressed"]
+[connection signal="pressed" from="Top" to="." method="_on_grabber_pressed"]
+[connection signal="pressed" from="TopRight" to="." method="_on_grabber_pressed"]
+[connection signal="pressed" from="Left" to="." method="_on_grabber_pressed"]
+[connection signal="pressed" from="Right" to="." method="_on_grabber_pressed"]
+[connection signal="pressed" from="BottomLeft" to="." method="_on_grabber_pressed"]
+[connection signal="pressed" from="Bottom" to="." method="_on_grabber_pressed"]
+[connection signal="pressed" from="BottomRight" to="." method="_on_grabber_pressed"]

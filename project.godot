@@ -8,11 +8,61 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "CameraDrag2D",
+"language": "GDScript",
+"path": "res://Library/NuiLib/2D/camera_drag_2d.gd"
+}, {
+"base": "Reference",
+"class": "CameraSlide2D",
+"language": "GDScript",
+"path": "res://Library/NuiLib/2D/camera_slide_2d.gd"
+}, {
+"base": "Reference",
+"class": "CameraZoom2D",
+"language": "GDScript",
+"path": "res://Library/NuiLib/2D/camera_zoom_2d.gd"
+}, {
+"base": "PanelContainer",
+"class": "Display",
+"language": "GDScript",
+"path": "res://Scenes/Editor/Workspace/Display/display.gd"
+}, {
+"base": "Camera2D",
+"class": "DisplayCamera",
+"language": "GDScript",
+"path": "res://Scenes/Camera/camera.gd"
+}, {
+"base": "PanelContainer",
+"class": "Screen",
+"language": "GDScript",
+"path": "res://Scenes/Editor/Workspace/Display/Screen/screen.gd"
+}, {
+"base": "Control",
+"class": "SpritePlayer",
+"language": "GDScript",
+"path": "res://Scenes/Editor/Workspace/Display/SpriteLoader/sprite_loader.gd"
+} ]
+_global_script_class_icons={
+"CameraDrag2D": "",
+"CameraSlide2D": "",
+"CameraZoom2D": "",
+"Display": "",
+"DisplayCamera": "",
+"Screen": "",
+"SpritePlayer": ""
+}
+
 [application]
 
 config/name="ATTune Lite"
 run/main_scene="res://Scenes/Editor/Editor.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+NodeBridge="*res://Scripts/node_bridge.gd"
 
 [display]
 
@@ -25,6 +75,24 @@ enabled=PoolStringArray( "res://addons/notes_tab/plugin.cfg" )
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[input]
+
+mouse_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+zoom_in={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+zoom_out={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 
 [physics]
 

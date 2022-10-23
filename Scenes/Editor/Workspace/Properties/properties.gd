@@ -1,16 +1,8 @@
 extends PanelContainer
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+# Nodes:
+onready var _screen_prop := $VLayout/ScreenProp
+onready var _sprite_prop := $VLayout/SpriteProp
+onready var _widget_prop := $VLayout/WidgetProp
+var display : Display
