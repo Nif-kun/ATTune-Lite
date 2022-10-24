@@ -1,12 +1,20 @@
 extends Camera2D
 class_name DisplayCamera
 
-#Object var:
-onready var zoom_camera = CameraZoom2D.new(self, "zoom_in", "zoom_out", false, 0.125)
+signal zooming(value)
+
+# Object var:
+onready var zoom_camera = CameraZoom2D.new(self, "zoom_in", "zoom_out", false, 0.1)
 
 
+# Private var:
+export var zoom_rate := 0.1
+
+
+# Handle key input, e.g. mouse or keyboard. 
 func _input(event):
+	zoom_camera.set_zoom_rate(zoom_rate)
 	zoom_camera.handle_input(event)
-#	var state = zoom_camera.state()
-#	if state == 1 or state == 2:
-#		print(zoom)
+	var state = zoom_camera.state()
+	if state == 1 or state == 2:
+		emit_signal("zooming", zoom)

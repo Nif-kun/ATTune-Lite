@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/Editor/Workspace/workspace.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/properties.gd" type="Script" id=2]
@@ -6,9 +6,19 @@
 [ext_resource path="res://Assets/Images/PNG/beemo.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Editor/MenuBar/MenuBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/screen_prop.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Fonts/GoogleSans/GoogleSans-Regular.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Scenes/Editor/Workspace/Display/Screen/screen.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/Camera/camera.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Editor/Workspace/Display/display.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Fonts/GoogleSans/GoogleSans-Bold.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://Scenes/Editor/Workspace/Properties/view_prop.gd" type="Script" id=12]
+[ext_resource path="res://Assets/Images/SVG/folder_open_white_48dp.svg" type="Texture" id=13]
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 7 )
+
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 7 )
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -21,16 +31,25 @@ border_width_bottom = 5
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
-[sub_resource type="StyleBoxFlat" id=5]
-draw_center = false
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
+[sub_resource type="StyleBoxFlat" id=10]
+
+[sub_resource type="DynamicFont" id=9]
+font_data = ExtResource( 11 )
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
 
 [node name="Editor" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = SubResource( 8 )
 custom_styles/panel = SubResource( 4 )
 
 [node name="VBox" type="VBoxContainer" parent="."]
@@ -39,9 +58,10 @@ margin_bottom = 600.0
 
 [node name="MenuBar" parent="VBox" instance=ExtResource( 5 )]
 margin_right = 1024.0
+margin_bottom = 41.0
 
 [node name="Workspace" type="HBoxContainer" parent="VBox"]
-margin_top = 38.0
+margin_top = 45.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
@@ -49,8 +69,8 @@ size_flags_vertical = 3
 script = ExtResource( 1 )
 
 [node name="Display" type="PanelContainer" parent="VBox/Workspace"]
-margin_right = 720.0
-margin_bottom = 562.0
+margin_right = 745.0
+margin_bottom = 555.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 6 )
@@ -59,50 +79,60 @@ script = ExtResource( 10 )
 [node name="ViewBox" type="ViewportContainer" parent="VBox/Workspace/Display"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 715.0
-margin_bottom = 557.0
+margin_right = 740.0
+margin_bottom = 550.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="VBox/Workspace/Display/ViewBox"]
-size = Vector2( 710, 552 )
-handle_input_locally = false
+size = Vector2( 735, 545 )
 render_target_update_mode = 3
 
 [node name="Screen" type="PanelContainer" parent="VBox/Workspace/Display/ViewBox/Viewport"]
-margin_left = 240.0
-margin_top = 121.0
-margin_right = 480.0
-margin_bottom = 441.0
+margin_left = 247.0
+margin_top = 112.0
+margin_right = 487.0
+margin_bottom = 432.0
 rect_min_size = Vector2( 240, 320 )
 rect_pivot_offset = Vector2( 120, 160 )
+mouse_filter = 2
 custom_styles/panel = SubResource( 3 )
 script = ExtResource( 8 )
 
 [node name="ColorBG" type="ColorRect" parent="VBox/Workspace/Display/ViewBox/Viewport/Screen"]
 margin_right = 240.0
 margin_bottom = 320.0
+mouse_filter = 2
 
 [node name="TextureBG" type="TextureRect" parent="VBox/Workspace/Display/ViewBox/Viewport/Screen"]
-visible = false
 margin_right = 240.0
 margin_bottom = 320.0
+mouse_filter = 2
 
 [node name="SpritePlayer" type="Control" parent="VBox/Workspace/Display/ViewBox/Viewport/Screen"]
 margin_right = 240.0
 margin_bottom = 320.0
+mouse_filter = 2
 script = ExtResource( 3 )
+texture = ExtResource( 4 )
+h_frames = 5
+v_frames = 3
+end_frame = 13
+speed = 0.1
 
 [node name="Sprite" type="Sprite" parent="VBox/Workspace/Display/ViewBox/Viewport/Screen/SpritePlayer"]
-position = Vector2( 123, 146 )
+position = Vector2( 120, 160 )
 texture = ExtResource( 4 )
 hframes = 5
 vframes = 3
 
+[node name="Timer" type="Timer" parent="VBox/Workspace/Display/ViewBox/Viewport/Screen/SpritePlayer"]
+
 [node name="Divider" type="VBoxContainer" parent="VBox/Workspace/Display/ViewBox/Viewport/Screen"]
 margin_right = 240.0
 margin_bottom = 320.0
+mouse_filter = 2
 custom_constants/separation = 0
 alignment = 2
 
@@ -120,96 +150,266 @@ margin_right = 240.0
 margin_bottom = 4.0
 
 [node name="Camera2D" type="Camera2D" parent="VBox/Workspace/Display/ViewBox/Viewport"]
-position = Vector2( 355, 276 )
+position = Vector2( 367, 272 )
 current = true
 script = ExtResource( 9 )
 
-[node name="TempBrdr" type="PanelContainer" parent="VBox/Workspace/Display/ViewBox/Viewport"]
-visible = false
-margin_right = 710.0
-margin_bottom = 552.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 5 )
-
-[node name="Properties" type="PanelContainer" parent="VBox/Workspace"]
-margin_left = 724.0
+[node name="Properties" type="ScrollContainer" parent="VBox/Workspace"]
+margin_left = 749.0
 margin_right = 1024.0
-margin_bottom = 562.0
-rect_min_size = Vector2( 300, 0 )
+margin_bottom = 555.0
+rect_min_size = Vector2( 275, 0 )
+size_flags_vertical = 3
+custom_styles/bg = SubResource( 10 )
 script = ExtResource( 2 )
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties"]
+margin_right = 275.0
+margin_bottom = 555.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ViewProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
+margin_right = 275.0
+margin_bottom = 80.0
+script = ExtResource( 12 )
+
+[node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/ViewProp"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 293.0
-margin_bottom = 555.0
+margin_right = 268.0
+margin_bottom = 73.0
+custom_constants/separation = 0
+
+[node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/ViewProp/VLayout"]
+margin_right = 261.0
+margin_bottom = 35.0
+
+[node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/ViewProp/VLayout/Title"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 254.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 9 )
+text = "View"
+
+[node name="ZoomEdit" type="HBoxContainer" parent="VBox/Workspace/Properties/VLayout/ViewProp/VLayout"]
+margin_top = 35.0
+margin_right = 261.0
+margin_bottom = 66.0
+
+[node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/ViewProp/VLayout/ZoomEdit"]
+margin_top = 5.0
+margin_right = 128.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Zoom"
+
+[node name="SpinBox" type="SpinBox" parent="VBox/Workspace/Properties/VLayout/ViewProp/VLayout/ZoomEdit"]
+margin_left = 132.0
+margin_right = 261.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+max_value = 400.0
+step = 10.0
 
 [node name="ScreenProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
-margin_right = 286.0
-margin_bottom = 42.0
+margin_top = 84.0
+margin_right = 275.0
+margin_bottom = 230.0
 script = ExtResource( 6 )
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/ScreenProp"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 279.0
-margin_bottom = 35.0
+margin_right = 268.0
+margin_bottom = 139.0
 custom_constants/separation = 0
 
 [node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout"]
-margin_right = 272.0
-margin_bottom = 28.0
+margin_right = 261.0
+margin_bottom = 35.0
 
 [node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/Title"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 265.0
-margin_bottom = 21.0
+margin_right = 254.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 9 )
 text = "Screen"
 
+[node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout"]
+margin_top = 35.0
+margin_right = 261.0
+margin_bottom = 132.0
+
+[node name="SizePreset" type="MenuButton" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout"]
+margin_right = 261.0
+margin_bottom = 27.0
+text = "Wow"
+
+[node name="SizeEdit" type="GridContainer" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout"]
+margin_top = 31.0
+margin_right = 261.0
+margin_bottom = 97.0
+size_flags_horizontal = 3
+columns = 2
+
+[node name="WidthLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit"]
+margin_top = 5.0
+margin_right = 129.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Width"
+
+[node name="WidthEdit" type="SpinBox" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit"]
+margin_left = 133.0
+margin_right = 261.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+max_value = 3480.0
+rounded = true
+
+[node name="HeightLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit"]
+margin_top = 40.0
+margin_right = 129.0
+margin_bottom = 61.0
+size_flags_horizontal = 3
+text = "Height"
+
+[node name="HeightEdit" type="SpinBox" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit"]
+margin_left = 133.0
+margin_top = 35.0
+margin_right = 261.0
+margin_bottom = 66.0
+max_value = 2160.0
+rounded = true
+
+[node name="Background" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
+margin_top = 234.0
+margin_right = 275.0
+margin_bottom = 339.0
+
+[node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/Background"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 268.0
+margin_bottom = 98.0
+custom_constants/separation = 0
+
+[node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/Background/VLayout"]
+margin_right = 261.0
+margin_bottom = 35.0
+
+[node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/Title"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 254.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 9 )
+text = "Background"
+
+[node name="BGEdit" type="GridContainer" parent="VBox/Workspace/Properties/VLayout/Background/VLayout"]
+margin_top = 35.0
+margin_right = 261.0
+margin_bottom = 91.0
+columns = 2
+
+[node name="ColorLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/BGEdit"]
+margin_right = 129.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Color"
+
+[node name="ColorEdit" type="ColorPickerButton" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/BGEdit"]
+margin_left = 133.0
+margin_right = 261.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 13 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 15 )
+color = Color( 1, 1, 1, 1 )
+edit_alpha = false
+
+[node name="TextureLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/BGEdit"]
+margin_top = 30.0
+margin_right = 129.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+text = "Texture"
+
+[node name="TextureEdit" type="HBoxContainer" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/BGEdit"]
+margin_left = 133.0
+margin_top = 25.0
+margin_right = 261.0
+margin_bottom = 56.0
+
+[node name="LineEdit" type="LineEdit" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/BGEdit/TextureEdit"]
+margin_right = 94.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+
+[node name="TextureButton" type="TextureButton" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/BGEdit/TextureEdit"]
+margin_left = 98.0
+margin_right = 128.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 30, 0 )
+texture_normal = ExtResource( 13 )
+expand = true
+stretch_mode = 5
+
 [node name="SpriteProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
-margin_top = 46.0
-margin_right = 286.0
-margin_bottom = 88.0
+margin_top = 343.0
+margin_right = 275.0
+margin_bottom = 392.0
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/SpriteProp"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 279.0
-margin_bottom = 35.0
+margin_right = 268.0
+margin_bottom = 42.0
 custom_constants/separation = 0
 
 [node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout"]
-margin_right = 272.0
-margin_bottom = 28.0
+margin_right = 261.0
+margin_bottom = 35.0
 
 [node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/Title"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 265.0
-margin_bottom = 21.0
+margin_right = 254.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 9 )
 text = "Sprite"
 
 [node name="WidgetProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
-margin_top = 92.0
-margin_right = 286.0
-margin_bottom = 134.0
+margin_top = 396.0
+margin_right = 275.0
+margin_bottom = 445.0
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/WidgetProp"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 279.0
-margin_bottom = 35.0
+margin_right = 268.0
+margin_bottom = 42.0
 custom_constants/separation = 0
 
 [node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/WidgetProp/VLayout"]
-margin_right = 272.0
-margin_bottom = 28.0
+margin_right = 261.0
+margin_bottom = 35.0
 
 [node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/WidgetProp/VLayout/Title"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 265.0
-margin_bottom = 21.0
+margin_right = 254.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 9 )
 text = "Widgets"
+
+[connection signal="timeout" from="VBox/Workspace/Display/ViewBox/Viewport/Screen/SpritePlayer/Timer" to="VBox/Workspace/Display/ViewBox/Viewport/Screen/SpritePlayer" method="_on_Timer_timeout"]
+[connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/ViewProp/VLayout/ZoomEdit/SpinBox" to="VBox/Workspace/Properties/VLayout/ViewProp" method="_on_Zoom_value_changed"]
+[connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit/WidthEdit" to="VBox/Workspace/Properties/VLayout/ScreenProp" method="_on_WidthEdit_value_changed"]
+[connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit/HeightEdit" to="VBox/Workspace/Properties/VLayout/ScreenProp" method="_on_HeightEdit_value_changed"]
