@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Scenes/Editor/Workspace/workspace.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/properties.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Assets/Fonts/GoogleSans/GoogleSans-Bold.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/view_prop.gd" type="Script" id=12]
 [ext_resource path="res://Assets/Images/SVG/folder_open_white_48dp.svg" type="Texture" id=13]
+[ext_resource path="res://Scenes/Editor/Workspace/Properties/background_prop.gd" type="Script" id=14]
 
 [sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 7 )
@@ -87,6 +88,8 @@ stretch = true
 
 [node name="Viewport" type="Viewport" parent="VBox/Workspace/Display/ViewBox"]
 size = Vector2( 735, 545 )
+own_world = true
+handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="Screen" type="PanelContainer" parent="VBox/Workspace/Display/ViewBox/Viewport"]
@@ -109,10 +112,13 @@ mouse_filter = 2
 margin_right = 240.0
 margin_bottom = 320.0
 mouse_filter = 2
+expand = true
+stretch_mode = 7
 
 [node name="SpritePlayer" type="Control" parent="VBox/Workspace/Display/ViewBox/Viewport/Screen"]
 margin_right = 240.0
 margin_bottom = 320.0
+rect_clip_content = true
 mouse_filter = 2
 script = ExtResource( 3 )
 texture = ExtResource( 4 )
@@ -246,7 +252,7 @@ margin_bottom = 132.0
 [node name="SizePreset" type="MenuButton" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout"]
 margin_right = 261.0
 margin_bottom = 27.0
-text = "Wow"
+text = "Custom"
 
 [node name="SizeEdit" type="GridContainer" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout"]
 margin_top = 31.0
@@ -285,23 +291,24 @@ margin_bottom = 66.0
 max_value = 2160.0
 rounded = true
 
-[node name="Background" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
+[node name="BackgroundProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
 margin_top = 234.0
 margin_right = 275.0
 margin_bottom = 339.0
+script = ExtResource( 14 )
 
-[node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/Background"]
+[node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/BackgroundProp"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 268.0
 margin_bottom = 98.0
 custom_constants/separation = 0
 
-[node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/Background/VLayout"]
+[node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout"]
 margin_right = 261.0
 margin_bottom = 35.0
 
-[node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/Title"]
+[node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/Title"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 254.0
@@ -309,19 +316,19 @@ margin_bottom = 28.0
 custom_fonts/font = SubResource( 9 )
 text = "Background"
 
-[node name="BGEdit" type="GridContainer" parent="VBox/Workspace/Properties/VLayout/Background/VLayout"]
+[node name="BGEdit" type="GridContainer" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout"]
 margin_top = 35.0
 margin_right = 261.0
 margin_bottom = 91.0
 columns = 2
 
-[node name="ColorLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/BGEdit"]
+[node name="ColorLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit"]
 margin_right = 129.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Color"
 
-[node name="ColorEdit" type="ColorPickerButton" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/BGEdit"]
+[node name="ColorEdit" type="ColorPickerButton" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit"]
 margin_left = 133.0
 margin_right = 261.0
 margin_bottom = 21.0
@@ -334,25 +341,25 @@ custom_styles/normal = SubResource( 15 )
 color = Color( 1, 1, 1, 1 )
 edit_alpha = false
 
-[node name="TextureLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/BGEdit"]
+[node name="TextureLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit"]
 margin_top = 30.0
 margin_right = 129.0
 margin_bottom = 51.0
 size_flags_horizontal = 3
 text = "Texture"
 
-[node name="TextureEdit" type="HBoxContainer" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/BGEdit"]
+[node name="TextureEdit" type="HBoxContainer" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit"]
 margin_left = 133.0
 margin_top = 25.0
 margin_right = 261.0
 margin_bottom = 56.0
 
-[node name="LineEdit" type="LineEdit" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/BGEdit/TextureEdit"]
+[node name="LineEdit" type="LineEdit" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit/TextureEdit"]
 margin_right = 94.0
 margin_bottom = 31.0
 size_flags_horizontal = 3
 
-[node name="TextureButton" type="TextureButton" parent="VBox/Workspace/Properties/VLayout/Background/VLayout/BGEdit/TextureEdit"]
+[node name="TextureButton" type="TextureButton" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit/TextureEdit"]
 margin_left = 98.0
 margin_right = 128.0
 margin_bottom = 31.0
@@ -360,6 +367,18 @@ rect_min_size = Vector2( 30, 0 )
 texture_normal = ExtResource( 13 )
 expand = true
 stretch_mode = 5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="VBox/Workspace/Properties/VLayout/BackgroundProp"]
+
+[node name="FileDialog" type="FileDialog" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/CanvasLayer"]
+margin_right = 315.0
+margin_bottom = 130.0
+window_title = "Select an Image File"
+resizable = true
+dialog_autowrap = true
+mode_overrides_title = false
+mode = 0
+access = 2
 
 [node name="SpriteProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
 margin_top = 343.0
@@ -413,3 +432,7 @@ text = "Widgets"
 [connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/ViewProp/VLayout/ZoomEdit/SpinBox" to="VBox/Workspace/Properties/VLayout/ViewProp" method="_on_Zoom_value_changed"]
 [connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit/WidthEdit" to="VBox/Workspace/Properties/VLayout/ScreenProp" method="_on_WidthEdit_value_changed"]
 [connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit/HeightEdit" to="VBox/Workspace/Properties/VLayout/ScreenProp" method="_on_HeightEdit_value_changed"]
+[connection signal="color_changed" from="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit/ColorEdit" to="VBox/Workspace/Properties/VLayout/BackgroundProp" method="_on_ColorEdit_color_changed"]
+[connection signal="text_changed" from="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit/TextureEdit/LineEdit" to="VBox/Workspace/Properties/VLayout/BackgroundProp" method="_on_TextureEdit_text_changed"]
+[connection signal="pressed" from="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit/TextureEdit/TextureButton" to="VBox/Workspace/Properties/VLayout/BackgroundProp" method="_on_TextureButton_pressed"]
+[connection signal="file_selected" from="VBox/Workspace/Properties/VLayout/BackgroundProp/CanvasLayer/FileDialog" to="VBox/Workspace/Properties/VLayout/BackgroundProp" method="_on_FileDialog_file_selected"]

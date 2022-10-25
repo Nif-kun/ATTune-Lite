@@ -22,3 +22,7 @@ func _resized():
 	yield(viewbox, "resized") # Yielded to avoid early value of viewbox as there is a delay.
 	camera.position = viewbox.rect_size / 2
 	screen.rect_position = (viewbox.rect_size / 2 ) - (screen.rect_size / 2)
+
+
+func _gui_input(event):
+	camera.zoom_event(event) # Moved from camera script to avoid zooming even when out of display.

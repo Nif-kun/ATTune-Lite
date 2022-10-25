@@ -11,8 +11,7 @@ onready var zoom_camera = CameraZoom2D.new(self, "zoom_in", "zoom_out", false, 0
 export var zoom_rate := 0.1
 
 
-# Handle key input, e.g. mouse or keyboard. 
-func _input(event):
+func zoom_event(event):
 	zoom_camera.set_zoom_rate(zoom_rate)
 	zoom_camera.handle_input(event)
 	var state = zoom_camera.state()
