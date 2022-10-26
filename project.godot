@@ -47,7 +47,12 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "SpritePlayer",
 "language": "GDScript",
-"path": "res://Scenes/Editor/Workspace/Display/SpriteLoader/sprite_loader.gd"
+"path": "res://Scenes/Editor/Workspace/Display/SpritePlayer/sprite_player.gd"
+}, {
+"base": "SpinBox",
+"class": "StrictSpinBox",
+"language": "GDScript",
+"path": "res://Scripts/strict_spinbox.gd"
 } ]
 _global_script_class_icons={
 "CameraDrag2D": "",
@@ -57,7 +62,8 @@ _global_script_class_icons={
 "DisplayCamera": "",
 "PropBase": "",
 "Screen": "",
-"SpritePlayer": ""
+"SpritePlayer": "",
+"StrictSpinBox": ""
 }
 
 [application]
@@ -66,13 +72,17 @@ config/name="ATTune Lite"
 run/main_scene="res://Scenes/Editor/Editor.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+ShortLib="*res://Scripts/short_lib.gd"
+
 [display]
 
 window/dpi/allow_hidpi=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/FlexContainer/plugin.cfg", "res://addons/notes_tab/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/notes_tab/plugin.cfg" )
 
 [gui]
 

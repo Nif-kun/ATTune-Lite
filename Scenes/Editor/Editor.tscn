@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/Editor/Workspace/workspace.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/properties.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Editor/Workspace/Display/SpriteLoader/sprite_loader.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Editor/Workspace/Display/SpritePlayer/sprite_player.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Images/PNG/beemo.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Editor/MenuBar/MenuBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/screen_prop.gd" type="Script" id=6]
@@ -167,7 +167,7 @@ script = ExtResource( 2 )
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties"]
 margin_right = 263.0
-margin_bottom = 682.0
+margin_bottom = 711.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -214,6 +214,8 @@ margin_bottom = 31.0
 size_flags_horizontal = 3
 max_value = 400.0
 step = 10.0
+value = 10.0
+suffix = "%"
 
 [node name="ScreenProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
 margin_top = 84.0
@@ -271,6 +273,7 @@ margin_bottom = 31.0
 size_flags_horizontal = 3
 max_value = 3480.0
 rounded = true
+suffix = "px"
 
 [node name="HeightLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit"]
 margin_top = 40.0
@@ -286,6 +289,7 @@ margin_right = 249.0
 margin_bottom = 66.0
 max_value = 2160.0
 rounded = true
+suffix = "px"
 
 [node name="BackgroundProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
 margin_top = 234.0
@@ -379,14 +383,14 @@ access = 2
 [node name="SpriteProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
 margin_top = 343.0
 margin_right = 263.0
-margin_bottom = 629.0
+margin_bottom = 658.0
 script = ExtResource( 15 )
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/SpriteProp"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 256.0
-margin_bottom = 279.0
+margin_bottom = 308.0
 custom_constants/separation = 0
 
 [node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout"]
@@ -404,7 +408,7 @@ text = "Sprite"
 [node name="GridContainer" type="GridContainer" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout"]
 margin_top = 35.0
 margin_right = 249.0
-margin_bottom = 272.0
+margin_bottom = 274.0
 columns = 2
 
 [node name="TextureLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
@@ -445,6 +449,8 @@ margin_left = 127.0
 margin_top = 35.0
 margin_right = 249.0
 margin_bottom = 66.0
+min_value = 1.0
+value = 1.0
 
 [node name="VFrameLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
 margin_top = 75.0
@@ -457,6 +463,8 @@ margin_left = 127.0
 margin_top = 70.0
 margin_right = 249.0
 margin_bottom = 101.0
+min_value = 1.0
+value = 1.0
 
 [node name="StartFrameLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
 margin_top = 110.0
@@ -488,27 +496,66 @@ margin_right = 123.0
 margin_bottom = 201.0
 text = "Speed"
 
-[node name="SpeedEdit" type="LineEdit" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="SpeedEdit" type="SpinBox" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
 margin_left = 127.0
 margin_top = 175.0
 margin_right = 249.0
 margin_bottom = 206.0
+min_value = 0.01
+max_value = 4096.0
+step = 0.01
+value = 1.0
+suffix = "s"
 
-[node name="LoopButton" type="Button" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
-margin_top = 210.0
+[node name="LoopLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_top = 214.0
 margin_right = 123.0
-margin_bottom = 237.0
+margin_bottom = 235.0
+text = "Loop"
 
-[node name="PlayButton" type="Button" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="LoopCheck" type="CheckBox" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
 margin_left = 127.0
 margin_top = 210.0
+margin_right = 151.0
+margin_bottom = 239.0
+size_flags_horizontal = 0
+pressed = true
+
+[node name="PlayButton" type="Button" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout"]
+margin_top = 274.0
 margin_right = 249.0
-margin_bottom = 237.0
+margin_bottom = 301.0
+toggle_mode = true
+text = "Play"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout"]
+
+[node name="FileDialog" type="FileDialog" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/CanvasLayer"]
+margin_right = 315.0
+margin_bottom = 130.0
+window_title = "Select an Image File"
+resizable = true
+dialog_autowrap = true
+mode_overrides_title = false
+mode = 0
+access = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="VBox/Workspace/Properties/VLayout/SpriteProp"]
+
+[node name="FileDialog" type="FileDialog" parent="VBox/Workspace/Properties/VLayout/SpriteProp/CanvasLayer"]
+margin_right = 315.0
+margin_bottom = 130.0
+window_title = "Select an Image File"
+resizable = true
+dialog_autowrap = true
+mode_overrides_title = false
+mode = 0
+access = 2
 
 [node name="WidgetProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
-margin_top = 633.0
+margin_top = 662.0
 margin_right = 263.0
-margin_bottom = 682.0
+margin_bottom = 711.0
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/WidgetProp"]
 margin_left = 7.0
@@ -537,3 +584,14 @@ text = "Widgets"
 [connection signal="text_changed" from="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit/TextureEdit/LineEdit" to="VBox/Workspace/Properties/VLayout/BackgroundProp" method="_on_TextureEdit_text_changed"]
 [connection signal="pressed" from="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit/TextureEdit/TextureButton" to="VBox/Workspace/Properties/VLayout/BackgroundProp" method="_on_TextureButton_pressed"]
 [connection signal="file_selected" from="VBox/Workspace/Properties/VLayout/BackgroundProp/CanvasLayer/FileDialog" to="VBox/Workspace/Properties/VLayout/BackgroundProp" method="_on_FileDialog_file_selected"]
+[connection signal="text_changed" from="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer/TextureEdit/LineEdit" to="VBox/Workspace/Properties/VLayout/SpriteProp" method="_on_TextureEdit_text_changed"]
+[connection signal="pressed" from="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer/TextureEdit/TextureButton" to="VBox/Workspace/Properties/VLayout/SpriteProp" method="_on_TextureButton_pressed"]
+[connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer/HFrameEdit" to="VBox/Workspace/Properties/VLayout/SpriteProp" method="_on_HFrameEdit_value_changed"]
+[connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer/VFrameEdit" to="VBox/Workspace/Properties/VLayout/SpriteProp" method="_on_VFrameEdit_value_changed"]
+[connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer/StartFrameEdit" to="VBox/Workspace/Properties/VLayout/SpriteProp" method="_on_StartFrameEdit_value_changed"]
+[connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer/EndFrameEdit" to="VBox/Workspace/Properties/VLayout/SpriteProp" method="_on_EndFrameEdit_value_changed"]
+[connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer/SpeedEdit" to="VBox/Workspace/Properties/VLayout/SpriteProp" method="_on_SpeedEdit_value_changed"]
+[connection signal="toggled" from="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer/LoopCheck" to="VBox/Workspace/Properties/VLayout/SpriteProp" method="_on_LoopCheck_toggled"]
+[connection signal="toggled" from="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/PlayButton" to="VBox/Workspace/Properties/VLayout/SpriteProp" method="_on_PlayButton_toggled"]
+[connection signal="file_selected" from="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/CanvasLayer/FileDialog" to="VBox/Workspace/Properties/VLayout/BackgroundProp" method="_on_FileDialog_file_selected"]
+[connection signal="file_selected" from="VBox/Workspace/Properties/VLayout/SpriteProp/CanvasLayer/FileDialog" to="VBox/Workspace/Properties/VLayout/SpriteProp" method="_on_FileDialog_file_selected"]

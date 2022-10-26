@@ -7,7 +7,7 @@ signal zooming(value)
 onready var zoom_camera = CameraZoom2D.new(self, "zoom_in", "zoom_out", false, 0.1)
 
 
-# Private var:
+# Public var:
 export var zoom_rate := 0.1
 
 

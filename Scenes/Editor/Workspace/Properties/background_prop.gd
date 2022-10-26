@@ -14,11 +14,12 @@ var texture_bg : TextureRect
 
 
 # Private var:
-var texture_file_filter := ["*.jpg ; JPG Images", "*.jpeg ; JPEG Images", "*.png ; PNG Images", "*.svg ; SVG Images"]
+var _texture_file_filter := ["*.jpg ; JPG Images", "*.jpeg ; JPEG Images", "*.png ; PNG Images", "*.svg ; SVG Images"]
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_file_dialog.set_filters(_texture_file_filter)
 	yield(self, "node_recieved") # Ensures that screen is loaded first before running code below
 	color_bg.color = _color_edit.color 
 
@@ -28,8 +29,7 @@ func _on_ColorEdit_color_changed(color):
 
 
 func _on_TextureEdit_text_changed(text):
-	var file = File.new()
-	if file.file_exists(text):
+	if File.new().file_exists(text):
 		var texture : Texture = load(text)
 		texture_bg.texture = texture
 	else:
@@ -38,7 +38,6 @@ func _on_TextureEdit_text_changed(text):
 
 func _on_TextureButton_pressed():
 	_file_dialog.popup_centered(OS.window_size / 2)
-	_file_dialog.set_filters(texture_file_filter)
 
 
 func _on_FileDialog_file_selected(path):

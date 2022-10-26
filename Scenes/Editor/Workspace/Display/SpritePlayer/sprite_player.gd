@@ -1,6 +1,9 @@
 extends Control
 class_name SpritePlayer
 
+signal started
+signal stopped
+
 
 #Nodes
 onready var _sprite := $Sprite
@@ -10,7 +13,7 @@ onready var _timer := $Timer
 #Private var:
 var _frame_buffer := 0
 var _loop := false
-var _play := false
+var _start_frame := 0
 var _end_frame := 0
 
 
@@ -51,6 +54,7 @@ func get_vframe() -> int:
 
 
 func set_start_frame(value):
+	_start_frame = value
 	_frame_buffer = value
 	_sprite.frame = value
 
@@ -76,20 +80,31 @@ func get_speed() -> float:
 
 
 func loop(value):
-	_timer.one_shot = !value
+	_loop = value
 
 
 func start():
-	_timer.start()
+	if _sprite.texture != null and _end_frame > _start_frame:
+		_timer.start()
+		emit_signal("started")
 
 
 func stop():
 	_timer.stop()
+	_sprite.frame = _start_frame
+	_frame_buffer = _start_frame
 
 
 func _on_Timer_timeout():
-	_sprite.frame = _frame_buffer
-	if _frame_buffer < _end_frame:
-		_frame_buffer += 1
-	else:
-		_frame_buffer = _sprite.frame
+	if _end_frame > _start_frame:
+		if _frame_buffer < (_sprite.vframes * _sprite.hframes):
+			_sprite.frame = _frame_buffer
+			if _frame_buffer < _end_frame:
+				_frame_buffer += 1
+			else:
+				_frame_buffer = _start_frame
+				if !_loop:
+					_timer.stop()
+					emit_signal("stopped")
+		else:
+			_frame_buffer = _start_frame

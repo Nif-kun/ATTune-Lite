@@ -24,6 +24,7 @@ var height_buffer := 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	ShortLib.set_script_all([_width_edit, _height_edit], StrictSpinBox)
 	yield(self, "node_recieved") # Ensures that screen is loaded first before running code below
 	_width_edit.set_min(screen.rect_min_size.x)
 	_height_edit.set_min(screen.rect_min_size.y)
