@@ -32,7 +32,12 @@ _global_script_classes=[ {
 "base": "Camera2D",
 "class": "DisplayCamera",
 "language": "GDScript",
-"path": "res://Scenes/Camera/camera.gd"
+"path": "res://Scenes/Editor/Workspace/Display/Camera/camera.gd"
+}, {
+"base": "PanelContainer",
+"class": "PropBase",
+"language": "GDScript",
+"path": "res://Scenes/Editor/Workspace/Properties/prop_base.gd"
 }, {
 "base": "PanelContainer",
 "class": "Screen",
@@ -50,6 +55,7 @@ _global_script_class_icons={
 "CameraZoom2D": "",
 "Display": "",
 "DisplayCamera": "",
+"PropBase": "",
 "Screen": "",
 "SpritePlayer": ""
 }
@@ -59,10 +65,6 @@ _global_script_class_icons={
 config/name="ATTune Lite"
 run/main_scene="res://Scenes/Editor/Editor.tscn"
 config/icon="res://icon.png"
-
-[autoload]
-
-NodeBridge="*res://Scripts/node_bridge.gd"
 
 [display]
 

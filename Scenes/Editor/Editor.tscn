@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Editor/Workspace/workspace.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/properties.gd" type="Script" id=2]
@@ -8,12 +8,13 @@
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/screen_prop.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Fonts/GoogleSans/GoogleSans-Regular.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Scenes/Editor/Workspace/Display/Screen/screen.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/Camera/camera.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Editor/Workspace/Display/Camera/camera.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Editor/Workspace/Display/display.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Fonts/GoogleSans/GoogleSans-Bold.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/view_prop.gd" type="Script" id=12]
 [ext_resource path="res://Assets/Images/SVG/folder_open_white_48dp.svg" type="Texture" id=13]
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/background_prop.gd" type="Script" id=14]
+[ext_resource path="res://Scenes/Editor/Workspace/Properties/sprite_prop.gd" type="Script" id=15]
 
 [sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 7 )
@@ -121,11 +122,6 @@ margin_bottom = 320.0
 rect_clip_content = true
 mouse_filter = 2
 script = ExtResource( 3 )
-texture = ExtResource( 4 )
-h_frames = 5
-v_frames = 3
-end_frame = 13
-speed = 0.1
 
 [node name="Sprite" type="Sprite" parent="VBox/Workspace/Display/ViewBox/Viewport/Screen/SpritePlayer"]
 position = Vector2( 120, 160 )
@@ -170,50 +166,50 @@ custom_styles/bg = SubResource( 10 )
 script = ExtResource( 2 )
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties"]
-margin_right = 275.0
-margin_bottom = 555.0
+margin_right = 263.0
+margin_bottom = 682.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
-margin_right = 275.0
+margin_right = 263.0
 margin_bottom = 80.0
 script = ExtResource( 12 )
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/ViewProp"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 268.0
+margin_right = 256.0
 margin_bottom = 73.0
 custom_constants/separation = 0
 
 [node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/ViewProp/VLayout"]
-margin_right = 261.0
+margin_right = 249.0
 margin_bottom = 35.0
 
 [node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/ViewProp/VLayout/Title"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 254.0
+margin_right = 242.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 9 )
 text = "View"
 
 [node name="ZoomEdit" type="HBoxContainer" parent="VBox/Workspace/Properties/VLayout/ViewProp/VLayout"]
 margin_top = 35.0
-margin_right = 261.0
+margin_right = 249.0
 margin_bottom = 66.0
 
 [node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/ViewProp/VLayout/ZoomEdit"]
 margin_top = 5.0
-margin_right = 128.0
+margin_right = 122.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Zoom"
 
 [node name="SpinBox" type="SpinBox" parent="VBox/Workspace/Properties/VLayout/ViewProp/VLayout/ZoomEdit"]
-margin_left = 132.0
-margin_right = 261.0
+margin_left = 126.0
+margin_right = 249.0
 margin_bottom = 31.0
 size_flags_horizontal = 3
 max_value = 400.0
@@ -221,56 +217,56 @@ step = 10.0
 
 [node name="ScreenProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
 margin_top = 84.0
-margin_right = 275.0
+margin_right = 263.0
 margin_bottom = 230.0
 script = ExtResource( 6 )
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/ScreenProp"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 268.0
+margin_right = 256.0
 margin_bottom = 139.0
 custom_constants/separation = 0
 
 [node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout"]
-margin_right = 261.0
+margin_right = 249.0
 margin_bottom = 35.0
 
 [node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/Title"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 254.0
+margin_right = 242.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 9 )
 text = "Screen"
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout"]
 margin_top = 35.0
-margin_right = 261.0
+margin_right = 249.0
 margin_bottom = 132.0
 
 [node name="SizePreset" type="MenuButton" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout"]
-margin_right = 261.0
+margin_right = 249.0
 margin_bottom = 27.0
 text = "Custom"
 
 [node name="SizeEdit" type="GridContainer" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout"]
 margin_top = 31.0
-margin_right = 261.0
+margin_right = 249.0
 margin_bottom = 97.0
 size_flags_horizontal = 3
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit"]
 margin_top = 5.0
-margin_right = 129.0
+margin_right = 123.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Width"
 
 [node name="WidthEdit" type="SpinBox" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit"]
-margin_left = 133.0
-margin_right = 261.0
+margin_left = 127.0
+margin_right = 249.0
 margin_bottom = 31.0
 size_flags_horizontal = 3
 max_value = 3480.0
@@ -278,59 +274,59 @@ rounded = true
 
 [node name="HeightLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit"]
 margin_top = 40.0
-margin_right = 129.0
+margin_right = 123.0
 margin_bottom = 61.0
 size_flags_horizontal = 3
 text = "Height"
 
 [node name="HeightEdit" type="SpinBox" parent="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit"]
-margin_left = 133.0
+margin_left = 127.0
 margin_top = 35.0
-margin_right = 261.0
+margin_right = 249.0
 margin_bottom = 66.0
 max_value = 2160.0
 rounded = true
 
 [node name="BackgroundProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
 margin_top = 234.0
-margin_right = 275.0
+margin_right = 263.0
 margin_bottom = 339.0
 script = ExtResource( 14 )
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/BackgroundProp"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 268.0
+margin_right = 256.0
 margin_bottom = 98.0
 custom_constants/separation = 0
 
 [node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout"]
-margin_right = 261.0
+margin_right = 249.0
 margin_bottom = 35.0
 
 [node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/Title"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 254.0
+margin_right = 242.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 9 )
 text = "Background"
 
 [node name="BGEdit" type="GridContainer" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout"]
 margin_top = 35.0
-margin_right = 261.0
+margin_right = 249.0
 margin_bottom = 91.0
 columns = 2
 
 [node name="ColorLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit"]
-margin_right = 129.0
+margin_right = 123.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Color"
 
 [node name="ColorEdit" type="ColorPickerButton" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit"]
-margin_left = 133.0
-margin_right = 261.0
+margin_left = 127.0
+margin_right = 249.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 custom_styles/hover = SubResource( 11 )
@@ -343,25 +339,25 @@ edit_alpha = false
 
 [node name="TextureLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit"]
 margin_top = 30.0
-margin_right = 129.0
+margin_right = 123.0
 margin_bottom = 51.0
 size_flags_horizontal = 3
 text = "Texture"
 
 [node name="TextureEdit" type="HBoxContainer" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit"]
-margin_left = 133.0
+margin_left = 127.0
 margin_top = 25.0
-margin_right = 261.0
+margin_right = 249.0
 margin_bottom = 56.0
 
 [node name="LineEdit" type="LineEdit" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit/TextureEdit"]
-margin_right = 94.0
+margin_right = 88.0
 margin_bottom = 31.0
 size_flags_horizontal = 3
 
 [node name="TextureButton" type="TextureButton" parent="VBox/Workspace/Properties/VLayout/BackgroundProp/VLayout/BGEdit/TextureEdit"]
-margin_left = 98.0
-margin_right = 128.0
+margin_left = 92.0
+margin_right = 122.0
 margin_bottom = 31.0
 rect_min_size = Vector2( 30, 0 )
 texture_normal = ExtResource( 13 )
@@ -382,48 +378,153 @@ access = 2
 
 [node name="SpriteProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
 margin_top = 343.0
-margin_right = 275.0
-margin_bottom = 392.0
+margin_right = 263.0
+margin_bottom = 629.0
+script = ExtResource( 15 )
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/SpriteProp"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 268.0
-margin_bottom = 42.0
+margin_right = 256.0
+margin_bottom = 279.0
 custom_constants/separation = 0
 
 [node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout"]
-margin_right = 261.0
+margin_right = 249.0
 margin_bottom = 35.0
 
 [node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/Title"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 254.0
+margin_right = 242.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 9 )
 text = "Sprite"
 
+[node name="GridContainer" type="GridContainer" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout"]
+margin_top = 35.0
+margin_right = 249.0
+margin_bottom = 272.0
+columns = 2
+
+[node name="TextureLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_top = 5.0
+margin_right = 123.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Texture"
+
+[node name="TextureEdit" type="HBoxContainer" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_left = 127.0
+margin_right = 249.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer/TextureEdit"]
+margin_right = 88.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+
+[node name="TextureButton" type="TextureButton" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer/TextureEdit"]
+margin_left = 92.0
+margin_right = 122.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 30, 0 )
+texture_normal = ExtResource( 13 )
+expand = true
+stretch_mode = 5
+
+[node name="HFrameLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_top = 40.0
+margin_right = 123.0
+margin_bottom = 61.0
+text = "HFrame"
+
+[node name="HFrameEdit" type="SpinBox" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_left = 127.0
+margin_top = 35.0
+margin_right = 249.0
+margin_bottom = 66.0
+
+[node name="VFrameLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_top = 75.0
+margin_right = 123.0
+margin_bottom = 96.0
+text = "VFrame"
+
+[node name="VFrameEdit" type="SpinBox" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_left = 127.0
+margin_top = 70.0
+margin_right = 249.0
+margin_bottom = 101.0
+
+[node name="StartFrameLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_top = 110.0
+margin_right = 123.0
+margin_bottom = 131.0
+text = "Start Frame"
+
+[node name="StartFrameEdit" type="SpinBox" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_left = 127.0
+margin_top = 105.0
+margin_right = 249.0
+margin_bottom = 136.0
+
+[node name="EndFrameLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_top = 145.0
+margin_right = 123.0
+margin_bottom = 166.0
+text = "End Frame"
+
+[node name="EndFrameEdit" type="SpinBox" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_left = 127.0
+margin_top = 140.0
+margin_right = 249.0
+margin_bottom = 171.0
+
+[node name="SpeedLabel" type="Label" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_top = 180.0
+margin_right = 123.0
+margin_bottom = 201.0
+text = "Speed"
+
+[node name="SpeedEdit" type="LineEdit" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_left = 127.0
+margin_top = 175.0
+margin_right = 249.0
+margin_bottom = 206.0
+
+[node name="LoopButton" type="Button" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_top = 210.0
+margin_right = 123.0
+margin_bottom = 237.0
+
+[node name="PlayButton" type="Button" parent="VBox/Workspace/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+margin_left = 127.0
+margin_top = 210.0
+margin_right = 249.0
+margin_bottom = 237.0
+
 [node name="WidgetProp" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout"]
-margin_top = 396.0
-margin_right = 275.0
-margin_bottom = 445.0
+margin_top = 633.0
+margin_right = 263.0
+margin_bottom = 682.0
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties/VLayout/WidgetProp"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 268.0
+margin_right = 256.0
 margin_bottom = 42.0
 custom_constants/separation = 0
 
 [node name="Title" type="PanelContainer" parent="VBox/Workspace/Properties/VLayout/WidgetProp/VLayout"]
-margin_right = 261.0
+margin_right = 249.0
 margin_bottom = 35.0
 
 [node name="Label" type="Label" parent="VBox/Workspace/Properties/VLayout/WidgetProp/VLayout/Title"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 254.0
+margin_right = 242.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 9 )
 text = "Widgets"

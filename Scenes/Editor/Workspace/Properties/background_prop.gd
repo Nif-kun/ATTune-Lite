@@ -1,4 +1,4 @@
-extends PanelContainer
+extends PropBase
 
 
 # Note:
@@ -6,9 +6,9 @@ extends PanelContainer
 
 
 # Nodes:
-onready var color_edit := $VLayout/BGEdit/ColorEdit
-onready var texture_edit := $VLayout/BGEdit/TextureEdit/LineEdit
-onready var file_dialog := $CanvasLayer/FileDialog
+onready var _color_edit := $VLayout/BGEdit/ColorEdit
+onready var _texture_edit := $VLayout/BGEdit/TextureEdit/LineEdit
+onready var _file_dialog := $CanvasLayer/FileDialog
 var color_bg : ColorRect
 var texture_bg : TextureRect
 
@@ -19,10 +19,8 @@ var texture_file_filter := ["*.jpg ; JPG Images", "*.jpeg ; JPEG Images", "*.png
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	yield(NodeBridge, "display_loaded") # Ensures that screen is loaded first before running code below
-	color_bg = NodeBridge.display.screen.color_bg
-	texture_bg = NodeBridge.display.screen.texture_bg
-	color_bg.color = color_edit.color 
+	yield(self, "node_recieved") # Ensures that screen is loaded first before running code below
+	color_bg.color = _color_edit.color 
 
 
 func _on_ColorEdit_color_changed(color):
@@ -39,10 +37,10 @@ func _on_TextureEdit_text_changed(text):
 
 
 func _on_TextureButton_pressed():
-	file_dialog.popup_centered(OS.window_size / 2)
-	file_dialog.set_filters(texture_file_filter)
+	_file_dialog.popup_centered(OS.window_size / 2)
+	_file_dialog.set_filters(texture_file_filter)
 
 
 func _on_FileDialog_file_selected(path):
-	texture_edit.text = path
-	texture_edit.emit_signal("text_changed", path)
+	_texture_edit.text = path
+	_texture_edit.emit_signal("text_changed", path)

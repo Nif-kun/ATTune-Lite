@@ -16,13 +16,9 @@ extends HBoxContainer
 
 # Nodes:
 onready var _display := $Display
-onready var _properties_node := $Properties
+onready var _properties := $Properties
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if _display != null:
-		NodeBridge.display = _display
-		NodeBridge.emit_signal("display_loaded")
-	
-
+	_properties.load_requirements(_display)
