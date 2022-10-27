@@ -22,6 +22,21 @@ func _ready():
 	_file_dialog.set_filters(_texture_file_filter)
 	yield(self, "node_recieved") # Ensures that screen is loaded first before running code below
 	color_bg.color = _color_edit.color 
+	texture_bg.texture = ShortLib.load_texture(_texture_edit.text)
+
+
+func set_data(data:Dictionary):
+	_color_edit.color = data["color"]
+	color_bg.color = data["color"]
+	_texture_edit.text = data["texture"]
+	texture_bg.texture = ShortLib.load_texture(data["texture"])
+
+
+func get_data() -> Dictionary:
+	return {
+		"color":_color_edit.color,
+		"texture":_texture_edit.text
+	}
 
 
 func _on_ColorEdit_color_changed(color):

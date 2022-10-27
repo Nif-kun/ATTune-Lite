@@ -25,30 +25,58 @@ func _ready():
 	_end_frame_edit.max_value = (_hframe_edit.value * _vframe_edit.value) - 1
 	_file_dialog.filters = _texture_file_filter
 	yield(self, "node_recieved") # Ensures that screen is loaded first before running code below
-	_load_texture(_texture_edit.text)
+	_setup_sprite_player()
+	# warning-ignore:RETURN_VALUE_DISCARDED
+	sprite_player.connect("stopped", self, "_on_SpritePlayer_stopped")
+
+
+func _setup_sprite_player():
+	sprite_player.set_texture(ShortLib.load_texture(_texture_edit.text))
 	sprite_player.set_hframe(_hframe_edit.value)
 	sprite_player.set_vframe(_vframe_edit.value)
 	sprite_player.set_start_frame(_start_frame_edit.value)
 	sprite_player.set_end_frame(_end_frame_edit.value)
 	sprite_player.set_speed(_speed_edit.value)
 	sprite_player.loop(_loop_check.pressed)
-	# warning-ignore:RETURN_VALUE_DISCARDED
-	sprite_player.connect("stopped", self, "_on_SpritePlayer_stopped")
 
 
-func _load_texture(path):
-	if File.new().file_exists(path):
-		var texture : Texture = load(path)
+func set_data(data:Dictionary):
+	_texture_edit.text = data["texture"]
+	_hframe_edit.value = data["hframe"]
+	_vframe_edit.value = data["vframe"]
+	_start_frame_edit.value = data["start_frame"]
+	_end_frame_edit.value = data["end_frame"]
+	_speed_edit.value = data["speed"]
+	_loop_check.pressed = data["loop"]
+	_setup_sprite_player() 
+
+
+func get_data():
+	return {
+		"texture":_texture_edit.text,
+		"hframe":_hframe_edit.value,
+		"vframe":_vframe_edit.value,
+		"start_frame":_start_frame_edit.value,
+		"end_frame":_end_frame_edit.value,
+		"speed":_speed_edit.value,
+		"loop":_loop_check.pressed
+	}
+
+
+func _on_TextureEdit_text_changed(text):
+	var texture = ShortLib.load_texture(text)
+	if texture != null:
+#		var image : Image = texture.get_data()
+#		image.resize(100,100)
+#		print(image)
+#		var ttx = ImageTexture.new()
+#		ttx.create_from_image(image)
+#		print(ttx)
 		sprite_player.set_texture(texture)
 		_play_button.disabled = false
 	else:
 		sprite_player.set_texture(null)
 		_play_button.disabled = true
-
-
-func _on_TextureEdit_text_changed(text):
-	_play_button.pressed = false
-	_load_texture(text)
 
 
 func _on_TextureButton_pressed():

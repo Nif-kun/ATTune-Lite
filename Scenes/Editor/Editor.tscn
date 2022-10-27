@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scenes/Editor/Workspace/workspace.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/properties.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Assets/Images/SVG/folder_open_white_48dp.svg" type="Texture" id=13]
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/background_prop.gd" type="Script" id=14]
 [ext_resource path="res://Scenes/Editor/Workspace/Properties/sprite_prop.gd" type="Script" id=15]
+[ext_resource path="res://Scenes/Editor/editor.gd" type="Script" id=16]
 
 [sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 7 )
@@ -53,6 +54,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource( 8 )
 custom_styles/panel = SubResource( 4 )
+script = ExtResource( 16 )
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_right = 1024.0
@@ -163,11 +165,13 @@ margin_bottom = 555.0
 rect_min_size = Vector2( 275, 0 )
 size_flags_vertical = 3
 custom_styles/bg = SubResource( 10 )
+scroll_vertical = 100
 script = ExtResource( 2 )
 
 [node name="VLayout" type="VBoxContainer" parent="VBox/Workspace/Properties"]
+margin_top = -100.0
 margin_right = 263.0
-margin_bottom = 711.0
+margin_bottom = 611.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -576,6 +580,8 @@ margin_bottom = 28.0
 custom_fonts/font = SubResource( 9 )
 text = "Widgets"
 
+[connection signal="open_file_pressed" from="VBox/MenuBar" to="." method="_on_MenuBar_open_file_pressed"]
+[connection signal="save_pressed" from="VBox/MenuBar" to="." method="_on_MenuBar_save_pressed"]
 [connection signal="timeout" from="VBox/Workspace/Display/ViewBox/Viewport/Screen/SpritePlayer/Timer" to="VBox/Workspace/Display/ViewBox/Viewport/Screen/SpritePlayer" method="_on_Timer_timeout"]
 [connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/ViewProp/VLayout/ZoomEdit/SpinBox" to="VBox/Workspace/Properties/VLayout/ViewProp" method="_on_Zoom_value_changed"]
 [connection signal="value_changed" from="VBox/Workspace/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit/WidthEdit" to="VBox/Workspace/Properties/VLayout/ScreenProp" method="_on_WidthEdit_value_changed"]
