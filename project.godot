@@ -24,25 +24,100 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Library/NuiLib/2D/camera_zoom_2d.gd"
 }, {
-"base": "PanelContainer",
-"class": "Display",
-"language": "GDScript",
-"path": "res://Scenes/Editor/Workspace/Display/display.gd"
-}, {
 "base": "Camera2D",
 "class": "DisplayCamera",
 "language": "GDScript",
 "path": "res://Scenes/Editor/Workspace/Display/Camera/camera.gd"
+}, {
+"base": "Reference",
+"class": "JSONConfigFile",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_config_file.gd"
+}, {
+"base": "Reference",
+"class": "JSONConfigProcessor",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_config_processor.gd"
+}, {
+"base": "Reference",
+"class": "JSONProperty",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property.gd"
+}, {
+"base": "JSONProperty",
+"class": "JSONPropertyArray",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property_array.gd"
+}, {
+"base": "JSONProperty",
+"class": "JSONPropertyBool",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property_bool.gd"
+}, {
+"base": "JSONProperty",
+"class": "JSONPropertyColor",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property_color.gd"
+}, {
+"base": "JSONProperty",
+"class": "JSONPropertyEnum",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property_enum.gd"
+}, {
+"base": "JSONProperty",
+"class": "JSONPropertyFile",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property_file.gd"
+}, {
+"base": "JSONProperty",
+"class": "JSONPropertyImage",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property_image.gd"
+}, {
+"base": "JSONProperty",
+"class": "JSONPropertyInteger",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property_integer.gd"
+}, {
+"base": "JSONProperty",
+"class": "JSONPropertyJSONConfigFile",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property_json_config_file.gd"
+}, {
+"base": "JSONProperty",
+"class": "JSONPropertyNumber",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property_number.gd"
+}, {
+"base": "JSONProperty",
+"class": "JSONPropertyObject",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property_object.gd"
+}, {
+"base": "JSONProperty",
+"class": "JSONPropertyPercentage",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property_percentage.gd"
+}, {
+"base": "JSONProperty",
+"class": "JSONPropertyString",
+"language": "GDScript",
+"path": "res://Library/json_config_file/json_properties/json_property_string.gd"
 }, {
 "base": "PanelContainer",
 "class": "PropBase",
 "language": "GDScript",
 "path": "res://Scenes/Editor/Workspace/Properties/prop_base.gd"
 }, {
-"base": "PanelContainer",
+"base": "VBoxContainer",
 "class": "Screen",
 "language": "GDScript",
 "path": "res://Scenes/Editor/Workspace/Display/Screen/screen.gd"
+}, {
+"base": "Reference",
+"class": "ShortLib",
+"language": "GDScript",
+"path": "res://Library/short_lib.gd"
 }, {
 "base": "Control",
 "class": "SpritePlayer",
@@ -53,17 +128,38 @@ _global_script_classes=[ {
 "class": "StrictSpinBox",
 "language": "GDScript",
 "path": "res://Scripts/strict_spinbox.gd"
+}, {
+"base": "PanelContainer",
+"class": "Viewer",
+"language": "GDScript",
+"path": "res://Scenes/Editor/Workspace/Display/display.gd"
 } ]
 _global_script_class_icons={
 "CameraDrag2D": "",
 "CameraSlide2D": "",
 "CameraZoom2D": "",
-"Display": "",
 "DisplayCamera": "",
+"JSONConfigFile": "",
+"JSONConfigProcessor": "",
+"JSONProperty": "",
+"JSONPropertyArray": "",
+"JSONPropertyBool": "",
+"JSONPropertyColor": "",
+"JSONPropertyEnum": "",
+"JSONPropertyFile": "",
+"JSONPropertyImage": "",
+"JSONPropertyInteger": "",
+"JSONPropertyJSONConfigFile": "",
+"JSONPropertyNumber": "",
+"JSONPropertyObject": "",
+"JSONPropertyPercentage": "",
+"JSONPropertyString": "",
 "PropBase": "",
 "Screen": "",
+"ShortLib": "",
 "SpritePlayer": "",
-"StrictSpinBox": ""
+"StrictSpinBox": "",
+"Viewer": ""
 }
 
 [application]
@@ -72,17 +168,13 @@ config/name="ATTune Lite"
 run/main_scene="res://Scenes/Editor/Editor.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-ShortLib="*res://Scripts/short_lib.gd"
-
 [display]
 
 window/dpi/allow_hidpi=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/notes_tab/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/AtlasPlayer/plugin.cfg", "res://addons/FlexContainer/plugin.cfg", "res://addons/dockable_container/plugin.cfg", "res://addons/native_dialogs/plugin.cfg", "res://addons/notes_tab/plugin.cfg" )
 
 [gui]
 

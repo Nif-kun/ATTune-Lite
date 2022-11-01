@@ -17,3 +17,8 @@ func zoom_event(event):
 	var state = zoom_camera.state()
 	if state == 1 or state == 2:
 		emit_signal("zooming", zoom)
+
+
+func zoom(value):
+	zoom.x = value
+	zoom.y = value

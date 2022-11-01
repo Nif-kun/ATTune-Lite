@@ -15,6 +15,8 @@ var _frame_buffer := 0
 var _loop := false
 var _start_frame := 0
 var _end_frame := 0
+var _auto_scale := true
+var _sprite_size_buffer := Vector2.ZERO
 
 
 # Called when the node enters the scene tree for the first time.
@@ -27,18 +29,46 @@ func _ready():
 func _resized():
 	if _sprite != null:
 		_sprite.position = rect_size / 2 #keep centered
+	if _auto_scale:
+		_resize_sprite()
 
 
-func set_texture(value):
+func _resize_sprite():
+	if get_texture() != null:
+		print(_sprite_size_buffer)
+		if _sprite_size_buffer.x > rect_size.x or _sprite_size_buffer.y > rect_size.y: # condition used later when auto and manual resize occurs
+			if (_sprite_size_buffer.x - rect_size.x) > (_sprite_size_buffer.y - rect_size.y): # If width is bigger
+				#apply rect_size.x (width) to sprite_size and wow var to height
+				_sprite.scale.x = (rect_size.x / 100) * 0.1
+				_sprite.scale.y = (((_sprite_size_buffer.y / _sprite_size_buffer.x) * rect_size.x) / 100 ) * 0.1
+			else:
+				_sprite.scale.y = (rect_size.y * 100) * 0.1
+				_sprite.scale.x = (((_sprite_size_buffer.x / _sprite_size_buffer.y) * rect_size.y) / 100 ) * 0.1
+
+
+func set_texture(value:Texture):
 	_sprite.texture = value
+	if value != null:
+		_sprite_size_buffer.x = value.get_size().x / get_hframe()
+		_sprite_size_buffer.y = value.get_size().y / get_vframe()
 
 
 func get_texture() -> Texture:
 	return _sprite.texture
 
 
+func set_auto_scale(value):
+	_auto_scale = value
+
+
+func get_auto_scale() -> bool:
+	return _auto_scale
+
+ 
 func set_hframe(value):
 	_sprite.hframes = value
+	if get_texture() != null:
+		_sprite_size_buffer.x = get_texture().get_size().x / value
 
 
 func get_hframe() -> int:
@@ -47,6 +77,8 @@ func get_hframe() -> int:
 
 func set_vframe(value):
 	_sprite.vframes = value
+	if get_texture() != null:
+		_sprite_size_buffer.y = get_texture().get_size().y / value
 
 
 func get_vframe() -> int:
@@ -97,7 +129,7 @@ func stop():
 
 func _on_Timer_timeout():
 	if _end_frame > _start_frame:
-		if _frame_buffer < (_sprite.vframes * _sprite.hframes):
+		if _frame_buffer < (get_vframe() * get_hframe()):
 			_sprite.frame = _frame_buffer
 			if _frame_buffer < _end_frame:
 				_frame_buffer += 1

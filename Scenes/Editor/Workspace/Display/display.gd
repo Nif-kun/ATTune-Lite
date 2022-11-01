@@ -1,5 +1,5 @@
 extends PanelContainer
-class_name Display
+class_name Viewer
 
 
 # Nodes:
