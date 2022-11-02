@@ -6,8 +6,7 @@ signal open_file_pressed(object, filter)
 # Nodes:
 onready var _color_edit := $VLayout/BGEdit/ColorEdit
 onready var _texture_edit := $VLayout/BGEdit/TextureEdit/LineEdit
-var color_bg : ColorRect
-var texture_bg : TextureRect
+var display : Display
 
 # Private var:
 export var _texture_file_filter := ["*.png, *.jpg, *.jpeg, *.svg ; Supported Images", "*.jpg ; JPG Images", "*.jpeg ; JPEG Images", "*.png ; PNG Images", "*.svg ; SVG Images"]
@@ -16,15 +15,15 @@ export var _texture_file_filter := ["*.png, *.jpg, *.jpeg, *.svg ; Supported Ima
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	yield(self, "node_recieved") # Ensures that screen is loaded first before running code below
-	color_bg.color = _color_edit.color 
-	texture_bg.texture = ShortLib.load_texture(_texture_edit.text)
+	display.set_bg_color(_color_edit.color)
+	display.set_bg_texture(ShortLib.load_texture(_texture_edit.text))
 
 
 func set_data(data:Dictionary):
 	_color_edit.color = data["color"]
-	color_bg.color = data["color"]
+	display.set_bg_color(data["color"])
 	_texture_edit.text = data["texture"]
-	texture_bg.texture = ShortLib.load_texture(data["texture"])
+	display.set_bg_texture(ShortLib.load_texture(data["texture"]))
 
 
 func get_data() -> Dictionary:
@@ -35,11 +34,11 @@ func get_data() -> Dictionary:
 
 
 func _on_ColorEdit_color_changed(color):
-	color_bg.color = color
+	display.set_bg_color(color)
 
 
 func _on_TextureEdit_text_changed(text):
-	texture_bg.texture = ShortLib.load_texture(text)
+	display.set_bg_texture(ShortLib.load_texture(text))
 
 
 func _on_open_file_pressed():

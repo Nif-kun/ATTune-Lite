@@ -8,7 +8,7 @@ extends PropBase
 onready var _size_preset := $VLayout/VLayout/SizePreset
 onready var _width_edit := $VLayout/VLayout/SizeEdit/WidthEdit
 onready var _height_edit := $VLayout/VLayout/SizeEdit/HeightEdit
-var screen : Screen
+var screen : Control # Refer to Editor > Docker > Viewer > Viewbox > Viewport > Screen
 var viewbox : ViewportContainer
 
 

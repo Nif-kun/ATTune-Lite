@@ -1,28 +1,27 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://addons/native_dialogs/bin/native_dialog_open_file.gdns" type="Script" id=1]
-[ext_resource path="res://Scenes/Editor/Workspace/Properties/properties.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Editor/Properties/properties.gd" type="Script" id=2]
 [ext_resource path="res://addons/dockable_container/dockable_container.gd" type="Script" id=3]
 [ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Editor/MenuBar/MenuBar.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Editor/Workspace/Properties/screen_prop.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Editor/Properties/screen_prop.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Fonts/GoogleSans/GoogleSans-Regular.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://Scenes/Editor/Workspace/Viewer/Screen/screen.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/Editor/Workspace/Viewer/Camera/camera.gd" type="Script" id=9]
-[ext_resource path="res://Scenes/Editor/Workspace/Viewer/viewer.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Editor/Viewer/camera.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Editor/Viewer/viewer.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Fonts/GoogleSans/GoogleSans-Bold.ttf" type="DynamicFontData" id=11]
-[ext_resource path="res://Scenes/Editor/Workspace/Properties/view_prop.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/Editor/Properties/view_prop.gd" type="Script" id=12]
 [ext_resource path="res://Assets/Images/SVG/folder_open_white_48dp.svg" type="Texture" id=13]
-[ext_resource path="res://Scenes/Editor/Workspace/Properties/background_prop.gd" type="Script" id=14]
-[ext_resource path="res://Scenes/Editor/Workspace/Properties/sprite_prop.gd" type="Script" id=15]
+[ext_resource path="res://Scenes/Editor/Properties/background_prop.gd" type="Script" id=14]
+[ext_resource path="res://Scenes/Editor/Properties/atlas_prop.gd" type="Script" id=15]
 [ext_resource path="res://Scenes/Editor/editor.gd" type="Script" id=16]
-[ext_resource path="res://addons/AtlasPlayer/atlas_player.gd" type="Script" id=17]
+[ext_resource path="res://Scenes/Player/Display/Display.tscn" type="PackedScene" id=17]
 [ext_resource path="res://addons/dockable_container/layout_panel.gd" type="Script" id=18]
 [ext_resource path="res://addons/dockable_container/layout_split.gd" type="Script" id=19]
 [ext_resource path="res://Themes/Docker.tres" type="Theme" id=20]
 [ext_resource path="res://addons/native_dialogs/bin/native_dialog_select_folder.gdns" type="Script" id=21]
 [ext_resource path="res://addons/native_dialogs/bin/native_dialog_save_file.gdns" type="Script" id=22]
-[ext_resource path="res://Scenes/Editor/Workspace/Viewer/Screen/Widgets/Widgets.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/Player/Widgets/Widgets.tscn" type="PackedScene" id=23]
 
 [sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 7 )
@@ -79,10 +78,6 @@ border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-
-[sub_resource type="StyleBoxEmpty" id=38]
-
-[sub_resource type="AtlasTexture" id=39]
 
 [sub_resource type="StyleBoxFlat" id=10]
 
@@ -153,49 +148,14 @@ rect_min_size = Vector2( 240, 320 )
 rect_pivot_offset = Vector2( 120, 160 )
 mouse_filter = 2
 custom_constants/separation = 0
-script = ExtResource( 8 )
 
-[node name="Display" type="PanelContainer" parent="Docker/Viewer/ViewBox/Viewport/Screen"]
-margin_right = 240.0
-margin_bottom = 302.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 38 )
-
-[node name="ColorBG" type="ColorRect" parent="Docker/Viewer/ViewBox/Viewport/Screen/Display"]
-margin_right = 240.0
-margin_bottom = 302.0
-mouse_filter = 2
-
-[node name="TextureBG" type="TextureRect" parent="Docker/Viewer/ViewBox/Viewport/Screen/Display"]
-margin_right = 240.0
-margin_bottom = 302.0
-rect_clip_content = true
-mouse_filter = 2
-expand = true
-stretch_mode = 7
-
-[node name="AtlasPlayer" type="TextureRect" parent="Docker/Viewer/ViewBox/Viewport/Screen/Display"]
-margin_right = 240.0
-margin_bottom = 302.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = SubResource( 39 )
-expand = true
-stretch_mode = 6
-script = ExtResource( 17 )
-hframe = 5
-vframe = 2
-
-[node name="Timer" type="Timer" parent="Docker/Viewer/ViewBox/Viewport/Screen/Display/AtlasPlayer"]
+[node name="Display" parent="Docker/Viewer/ViewBox/Viewport/Screen" instance=ExtResource( 17 )]
 
 [node name="Widgets" parent="Docker/Viewer/ViewBox/Viewport/Screen" instance=ExtResource( 23 )]
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 302.0
+margin_top = 288.0
 margin_right = 240.0
 margin_bottom = 320.0
 
@@ -212,6 +172,7 @@ margin_bottom = 599.5
 rect_min_size = Vector2( 275, 0 )
 size_flags_vertical = 3
 custom_styles/bg = SubResource( 10 )
+follow_focus = true
 scroll_vertical = 100
 script = ExtResource( 2 )
 
@@ -420,24 +381,24 @@ texture_normal = ExtResource( 13 )
 expand = true
 stretch_mode = 5
 
-[node name="SpriteProp" type="PanelContainer" parent="Docker/Properties/VLayout"]
+[node name="AtlasProp" type="PanelContainer" parent="Docker/Properties/VLayout"]
 margin_top = 343.0
 margin_right = 263.0
 margin_bottom = 658.0
 script = ExtResource( 15 )
 
-[node name="VLayout" type="VBoxContainer" parent="Docker/Properties/VLayout/SpriteProp"]
+[node name="VLayout" type="VBoxContainer" parent="Docker/Properties/VLayout/AtlasProp"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 256.0
 margin_bottom = 308.0
 custom_constants/separation = 0
 
-[node name="Title" type="PanelContainer" parent="Docker/Properties/VLayout/SpriteProp/VLayout"]
+[node name="Title" type="PanelContainer" parent="Docker/Properties/VLayout/AtlasProp/VLayout"]
 margin_right = 249.0
 margin_bottom = 35.0
 
-[node name="Label" type="Label" parent="Docker/Properties/VLayout/SpriteProp/VLayout/Title"]
+[node name="Label" type="Label" parent="Docker/Properties/VLayout/AtlasProp/VLayout/Title"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 242.0
@@ -445,31 +406,31 @@ margin_bottom = 28.0
 custom_fonts/font = SubResource( 9 )
 text = "Sprite"
 
-[node name="GridContainer" type="GridContainer" parent="Docker/Properties/VLayout/SpriteProp/VLayout"]
+[node name="GridContainer" type="GridContainer" parent="Docker/Properties/VLayout/AtlasProp/VLayout"]
 margin_top = 35.0
 margin_right = 249.0
 margin_bottom = 274.0
 columns = 2
 
-[node name="TextureLabel" type="Label" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="TextureLabel" type="Label" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_top = 5.0
 margin_right = 123.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Texture"
 
-[node name="TextureEdit" type="HBoxContainer" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="TextureEdit" type="HBoxContainer" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_left = 127.0
 margin_right = 249.0
 margin_bottom = 31.0
 size_flags_horizontal = 3
 
-[node name="LineEdit" type="LineEdit" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer/TextureEdit"]
+[node name="LineEdit" type="LineEdit" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer/TextureEdit"]
 margin_right = 88.0
 margin_bottom = 31.0
 size_flags_horizontal = 3
 
-[node name="TextureButton" type="TextureButton" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer/TextureEdit"]
+[node name="TextureButton" type="TextureButton" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer/TextureEdit"]
 margin_left = 92.0
 margin_right = 122.0
 margin_bottom = 31.0
@@ -478,13 +439,13 @@ texture_normal = ExtResource( 13 )
 expand = true
 stretch_mode = 5
 
-[node name="HFrameLabel" type="Label" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="HFrameLabel" type="Label" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_top = 40.0
 margin_right = 123.0
 margin_bottom = 61.0
 text = "HFrame"
 
-[node name="HFrameEdit" type="SpinBox" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="HFrameEdit" type="SpinBox" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_left = 127.0
 margin_top = 35.0
 margin_right = 249.0
@@ -492,13 +453,13 @@ margin_bottom = 66.0
 min_value = 1.0
 value = 1.0
 
-[node name="VFrameLabel" type="Label" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="VFrameLabel" type="Label" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_top = 75.0
 margin_right = 123.0
 margin_bottom = 96.0
 text = "VFrame"
 
-[node name="VFrameEdit" type="SpinBox" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="VFrameEdit" type="SpinBox" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_left = 127.0
 margin_top = 70.0
 margin_right = 249.0
@@ -506,13 +467,13 @@ margin_bottom = 101.0
 min_value = 1.0
 value = 1.0
 
-[node name="StartFrameLabel" type="Label" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="StartFrameLabel" type="Label" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_top = 110.0
 margin_right = 123.0
 margin_bottom = 131.0
 text = "Start Frame"
 
-[node name="StartFrameEdit" type="SpinBox" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="StartFrameEdit" type="SpinBox" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_left = 127.0
 margin_top = 105.0
 margin_right = 249.0
@@ -520,13 +481,13 @@ margin_bottom = 136.0
 min_value = 1.0
 value = 1.0
 
-[node name="EndFrameLabel" type="Label" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="EndFrameLabel" type="Label" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_top = 145.0
 margin_right = 123.0
 margin_bottom = 166.0
 text = "End Frame"
 
-[node name="EndFrameEdit" type="SpinBox" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="EndFrameEdit" type="SpinBox" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_left = 127.0
 margin_top = 140.0
 margin_right = 249.0
@@ -534,13 +495,13 @@ margin_bottom = 171.0
 min_value = 1.0
 value = 1.0
 
-[node name="SpeedLabel" type="Label" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="SpeedLabel" type="Label" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_top = 180.0
 margin_right = 123.0
 margin_bottom = 201.0
 text = "Speed"
 
-[node name="SpeedEdit" type="SpinBox" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="SpeedEdit" type="SpinBox" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_left = 127.0
 margin_top = 175.0
 margin_right = 249.0
@@ -551,13 +512,13 @@ step = 0.01
 value = 1.0
 suffix = "s"
 
-[node name="LoopLabel" type="Label" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="LoopLabel" type="Label" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_top = 214.0
 margin_right = 123.0
 margin_bottom = 235.0
 text = "Loop"
 
-[node name="LoopCheck" type="CheckBox" parent="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer"]
+[node name="LoopCheck" type="CheckBox" parent="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer"]
 margin_left = 127.0
 margin_top = 210.0
 margin_right = 151.0
@@ -565,7 +526,7 @@ margin_bottom = 239.0
 size_flags_horizontal = 0
 pressed = true
 
-[node name="PlayButton" type="Button" parent="Docker/Properties/VLayout/SpriteProp/VLayout"]
+[node name="PlayButton" type="Button" parent="Docker/Properties/VLayout/AtlasProp/VLayout"]
 margin_top = 274.0
 margin_right = 249.0
 margin_bottom = 301.0
@@ -625,18 +586,18 @@ script = ExtResource( 21 )
 [connection signal="value_changed" from="Docker/Properties/VLayout/ViewProp/VLayout/ZoomEdit/SpinBox" to="Docker/Properties/VLayout/ViewProp" method="_on_Zoom_value_changed"]
 [connection signal="value_changed" from="Docker/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit/WidthEdit" to="Docker/Properties/VLayout/ScreenProp" method="_on_WidthEdit_value_changed"]
 [connection signal="value_changed" from="Docker/Properties/VLayout/ScreenProp/VLayout/VLayout/SizeEdit/HeightEdit" to="Docker/Properties/VLayout/ScreenProp" method="_on_HeightEdit_value_changed"]
-[connection signal="open_file_pressed" from="Docker/Properties/VLayout/BackgroundProp" to="Docker/Properties" method="_on_open_file_pressed"]
+[connection signal="open_file_pressed" from="Docker/Properties/VLayout/BackgroundProp" to="." method="_on_Properties_open_file_pressed"]
 [connection signal="color_changed" from="Docker/Properties/VLayout/BackgroundProp/VLayout/BGEdit/ColorEdit" to="Docker/Properties/VLayout/BackgroundProp" method="_on_ColorEdit_color_changed"]
 [connection signal="text_changed" from="Docker/Properties/VLayout/BackgroundProp/VLayout/BGEdit/TextureEdit/LineEdit" to="Docker/Properties/VLayout/BackgroundProp" method="_on_TextureEdit_text_changed"]
 [connection signal="pressed" from="Docker/Properties/VLayout/BackgroundProp/VLayout/BGEdit/TextureEdit/TextureButton" to="Docker/Properties/VLayout/BackgroundProp" method="_on_open_file_pressed"]
-[connection signal="open_file_pressed" from="Docker/Properties/VLayout/SpriteProp" to="Docker/Properties" method="_on_open_file_pressed"]
-[connection signal="text_changed" from="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer/TextureEdit/LineEdit" to="Docker/Properties/VLayout/SpriteProp" method="_on_TextureEdit_text_changed"]
-[connection signal="pressed" from="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer/TextureEdit/TextureButton" to="Docker/Properties/VLayout/SpriteProp" method="_on_open_file_pressed"]
-[connection signal="value_changed" from="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer/HFrameEdit" to="Docker/Properties/VLayout/SpriteProp" method="_on_HFrameEdit_value_changed"]
-[connection signal="value_changed" from="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer/VFrameEdit" to="Docker/Properties/VLayout/SpriteProp" method="_on_VFrameEdit_value_changed"]
-[connection signal="value_changed" from="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer/StartFrameEdit" to="Docker/Properties/VLayout/SpriteProp" method="_on_StartFrameEdit_value_changed"]
-[connection signal="value_changed" from="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer/EndFrameEdit" to="Docker/Properties/VLayout/SpriteProp" method="_on_EndFrameEdit_value_changed"]
-[connection signal="value_changed" from="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer/SpeedEdit" to="Docker/Properties/VLayout/SpriteProp" method="_on_SpeedEdit_value_changed"]
-[connection signal="toggled" from="Docker/Properties/VLayout/SpriteProp/VLayout/GridContainer/LoopCheck" to="Docker/Properties/VLayout/SpriteProp" method="_on_LoopCheck_toggled"]
-[connection signal="toggled" from="Docker/Properties/VLayout/SpriteProp/VLayout/PlayButton" to="Docker/Properties/VLayout/SpriteProp" method="_on_PlayButton_toggled"]
+[connection signal="open_file_pressed" from="Docker/Properties/VLayout/AtlasProp" to="Docker/Properties" method="_on_open_file_pressed"]
+[connection signal="text_changed" from="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer/TextureEdit/LineEdit" to="Docker/Properties/VLayout/AtlasProp" method="_on_TextureEdit_text_changed"]
+[connection signal="pressed" from="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer/TextureEdit/TextureButton" to="Docker/Properties/VLayout/AtlasProp" method="_on_open_file_pressed"]
+[connection signal="value_changed" from="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer/HFrameEdit" to="Docker/Properties/VLayout/AtlasProp" method="_on_HFrameEdit_value_changed"]
+[connection signal="value_changed" from="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer/VFrameEdit" to="Docker/Properties/VLayout/AtlasProp" method="_on_VFrameEdit_value_changed"]
+[connection signal="value_changed" from="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer/StartFrameEdit" to="Docker/Properties/VLayout/AtlasProp" method="_on_StartFrameEdit_value_changed"]
+[connection signal="value_changed" from="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer/EndFrameEdit" to="Docker/Properties/VLayout/AtlasProp" method="_on_EndFrameEdit_value_changed"]
+[connection signal="value_changed" from="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer/SpeedEdit" to="Docker/Properties/VLayout/AtlasProp" method="_on_SpeedEdit_value_changed"]
+[connection signal="toggled" from="Docker/Properties/VLayout/AtlasProp/VLayout/GridContainer/LoopCheck" to="Docker/Properties/VLayout/AtlasProp" method="_on_LoopCheck_toggled"]
+[connection signal="toggled" from="Docker/Properties/VLayout/AtlasProp/VLayout/PlayButton" to="Docker/Properties/VLayout/AtlasProp" method="_on_PlayButton_toggled"]
 [connection signal="files_selected" from="NativeDialogOpenFile" to="." method="_on_NativeDialogOpenFile_files_selected"]

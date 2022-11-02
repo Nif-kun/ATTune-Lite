@@ -7,6 +7,8 @@ onready var viewbox := $ViewBox
 onready var viewport := $ViewBox/Viewport
 onready var camera := $ViewBox/Viewport/Camera2D
 onready var screen := $ViewBox/Viewport/Screen
+onready var display := $ViewBox/Viewport/Screen/Display
+onready var widgets := $ViewBox/Viewport/Screen/Widgets
 
 
 # Called when the node enters the scene tree for the first time.
