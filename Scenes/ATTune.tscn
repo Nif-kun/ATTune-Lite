@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/dockable_container/dockable_container.gd" type="Script" id=1]
+[ext_resource path="res://addons/dockable_container/layout_panel.gd" type="Script" id=2]
+[ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=1]
+resource_name = "Tabs"
+script = ExtResource( 2 )
+names = PoolStringArray( "Menu", "PanelContainer2" )
+current_tab = 0
+
+[sub_resource type="Resource" id=2]
+resource_name = "Layout"
+script = ExtResource( 3 )
+root = SubResource( 1 )
+hidden_tabs = {
+}
+
+[node name="ATTune" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Docker" type="Container" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+layout = SubResource( 2 )
+
+[node name="Menu" type="PanelContainer" parent="Docker"]
+margin_left = 4.0
+margin_top = 32.0
+margin_right = 36.0
+margin_bottom = 46.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="Docker"]
+visible = false
+margin_right = 14.0
+margin_bottom = 14.0

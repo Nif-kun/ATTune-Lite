@@ -11,10 +11,13 @@ static func load_texture(path) -> Texture:
 	if File.new().file_exists(path):
 		var image := Image.new()
 		var image_texture := ImageTexture.new()
-		# warning-ignore:return_value_discarded
-		image.load(path)
+		var err = image.load(path)
+		if err:
+			push_warning("ShortLib[WRN]: image could not be loaded, file is either not an image type, corrupted, or restricted. (Substituting return value with null.)")
+			return null
 		image_texture.create_from_image(image)
 		return image_texture
+	push_warning("ShortLib[WRN]: file does not exist! (Substituting return value with null.)")
 	return null
 
 
@@ -30,9 +33,3 @@ static func get_greater(x, y) -> float:
 	if x > y:
 		return x
 	return y
-
-
-static func is_greater(left, right) -> bool:
-	if left > right:
-		return true
-	return false

@@ -116,10 +116,10 @@ func _on_LoopCheck_toggled(button_pressed):
 func _on_PlayButton_toggled(button_pressed):
 	if button_pressed:
 		_play_button.text = "Stop"
-		display.start_atlas_player()
+		display.start()
 	else:
 		_play_button.text = "Start"
-		display.stop_atlas_player()
+		display.stop()
 
 
 func _on_AtlasPlayer_stopped():

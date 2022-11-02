@@ -9,6 +9,7 @@ onready var _ui_lock := $UILock
 
 # Private var:
 export var _editor_version := "1.0"
+export var _min_window_size := Vector2(545,393)
 var _data_buffer := {}
 var _event_object
 var _last_focused
@@ -16,6 +17,7 @@ var _last_focused
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	OS.min_window_size = _min_window_size
 	_properties.load_requirements(_viewer)
 
 
