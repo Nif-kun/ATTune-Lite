@@ -1,18 +1,22 @@
-extends ScrollContainer
+extends VBoxContainer
 
 # Signals
 signal open_file_pressed(object, filter)
 
 # Nodes:
-onready var view_prop := $VLayout/ViewProp
-onready var screen_prop := $VLayout/ScreenProp
-onready var background_prop := $VLayout/BackgroundProp
-onready var atlas_prop := $VLayout/AtlasProp
-onready var widget_prop := $VLayout/WidgetProp
+onready var view_prop := $ScrollBox/VLayout/ViewProp
+onready var screen_prop := $ScrollBox/VLayout/ScreenProp
+onready var background_prop := $ScrollBox/VLayout/BackgroundProp
+onready var atlas_prop := $ScrollBox/VLayout/AtlasProp
+onready var widget_prop := $ScrollBox/VLayout/WidgetProp
+onready var scroll_box := $ScrollBox
+
+
+func _ready():
+	scroll_box.scroll_vertical = 0
 
 
 func load_requirements(viewer : Viewer):
-	scroll_vertical = 0
 	view_prop.camera = viewer.camera
 	view_prop.emit_signal("node_recieved")
 	screen_prop.screen = viewer.screen

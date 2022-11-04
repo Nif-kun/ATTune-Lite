@@ -15,8 +15,14 @@ margin_right = 1003.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 
+[node name="Button" type="Button" parent="HFrame"]
+margin_right = 54.0
+margin_bottom = 20.0
+text = "< Back"
+
 [node name="File" type="MenuButton" parent="HFrame"]
-margin_right = 35.0
+margin_left = 58.0
+margin_right = 93.0
 margin_bottom = 20.0
 focus_mode = 2
 text = "File"
@@ -24,16 +30,16 @@ items = [ "New File", null, 0, false, false, 0, 0, null, "", false, "Open File..
 script = ExtResource( 2 )
 
 [node name="Edit" type="MenuButton" parent="HFrame"]
-margin_left = 39.0
-margin_right = 75.0
+margin_left = 97.0
+margin_right = 133.0
 margin_bottom = 20.0
 focus_mode = 2
 text = "Edit"
 script = ExtResource( 2 )
 
 [node name="Help" type="MenuButton" parent="HFrame"]
-margin_left = 79.0
-margin_right = 121.0
+margin_left = 137.0
+margin_right = 179.0
 margin_bottom = 20.0
 focus_mode = 2
 text = "Help"

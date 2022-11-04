@@ -15,6 +15,9 @@ static func load_texture(path) -> Texture:
 		if err:
 			push_warning("ShortLib[WRN]: image could not be loaded, file is either not an image type, corrupted, or restricted. (Substituting return value with null.)")
 			return null
+#		print(image.get_data())
+		var wow = File.new()
+		wow.
 		image_texture.create_from_image(image)
 		return image_texture
 	push_warning("ShortLib[WRN]: file does not exist! (Substituting return value with null.)")

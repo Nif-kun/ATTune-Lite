@@ -1,6 +1,11 @@
 extends PanelContainer
 
 
+# Next objective:
+# Save it as json then zip it with images. If a better option exist, that'll be nice
+# When opening, 
+
+
 # Nodes:
 onready var _viewer := $Docker/Viewer
 onready var _properties := $Docker/Properties
@@ -30,7 +35,7 @@ func save_project():
 		}
 	data["project_name"] = "tester" # not yet implemented
 	data["background"] = _properties.background_prop.get_data()
-	data["sprite"] = _properties.sprite_prop.get_data()
+	data["sprite"] = _properties.atlas_prop.get_data()
 	_data_buffer = data
 	print(data)
 
@@ -38,7 +43,7 @@ func save_project():
 # Note: make a func that checks the dictionary for missing key and add them with default val.
 func load_project():
 	_properties.background_prop.set_data(_data_buffer["background"])
-	_properties.sprite_prop.set_data(_data_buffer["sprite"])
+	_properties.atlas_prop.set_data(_data_buffer["sprite"])
 
 
 func _on_MenuBar_save_pressed():
@@ -73,4 +78,4 @@ func _on_NativeDialogOpenFile_files_selected(files):
 
 
 func _on_MenuBar_new_file_pressed():
-	pass # Replace with function body.
+	load_project()
