@@ -36,12 +36,13 @@ func save_project():
 	data["project_name"] = "tester" # not yet implemented
 	data["background"] = _properties.background_prop.get_data()
 	data["sprite"] = _properties.atlas_prop.get_data()
-	_data_buffer = data
+	_data_buffer = data # data buffer to be removed when json file path added to direct save
 	print(data)
 
 
 # Note: make a func that checks the dictionary for missing key and add them with default val.
 func load_project():
+	# data_buffer to be removed when json file path added to directly load from save file
 	_properties.background_prop.set_data(_data_buffer["background"])
 	_properties.atlas_prop.set_data(_data_buffer["sprite"])
 

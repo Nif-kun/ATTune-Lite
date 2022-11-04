@@ -11,7 +11,7 @@
 [ext_resource path="res://Assets/Icons/Material/white_48dp/library_music_white_48dp.svg" type="Texture" id=9]
 [ext_resource path="res://Assets/Fonts/GoogleSans/GoogleSans-Regular.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Assets/Fonts/GoogleSans/GoogleSans-Medium.ttf" type="DynamicFontData" id=11]
-[ext_resource path="res://Assets/Icons/Material/white_48dp/palette_white_48dp.svg" type="Texture" id=12]
+[ext_resource path="res://Assets/Icons/Material/white_48dp/palette_white_filled_48dp.svg" type="Texture" id=12]
 [ext_resource path="res://Assets/Icons/Material/white_48dp/search_white_48dp.svg" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=26]
@@ -164,9 +164,9 @@ text = "FeelVibes"
 
 [node name="Path" type="Label" parent="Docker/Header/HBox"]
 margin_left = 82.0
-margin_top = 23.0
+margin_top = 19.0
 margin_right = 82.0
-margin_bottom = 37.0
+margin_bottom = 40.0
 
 [node name="Menu" type="PanelContainer" parent="Docker"]
 margin_top = 61.5
@@ -265,6 +265,8 @@ custom_styles/hover = SubResource( 16 )
 custom_styles/pressed = SubResource( 17 )
 custom_styles/focus = SubResource( 24 )
 custom_styles/normal = SubResource( 21 )
+toggle_mode = true
+group = SubResource( 25 )
 text = "Design"
 icon = ExtResource( 12 )
 align = 0
@@ -323,12 +325,8 @@ margin_right = 750.0
 margin_bottom = 10.0
 size_flags_horizontal = 3
 
-[node name="TextureButton" type="TextureButton" parent="Docker/Content/DesignTab/VBox/Contents/VBox"]
+[node name="Create" type="TextureButton" parent="Docker/Content/DesignTab/VBox/Contents/VBox"]
 margin_right = 740.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Docker/Content"]
-margin_right = 774.0
-margin_bottom = 429.0
 
 [node name="Widgets" parent="Docker" instance=ExtResource( 4 )]
 margin_top = -0.5

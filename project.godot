@@ -78,7 +78,7 @@ window/dpi/allow_hidpi=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/AtlasPlayer/plugin.cfg", "res://addons/FlexContainer/plugin.cfg", "res://addons/dockable_container/plugin.cfg", "res://addons/native_dialogs/plugin.cfg", "res://addons/notes_tab/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/AtlasPlayer/plugin.cfg", "res://addons/FlexContainer/plugin.cfg", "res://addons/dockable_container/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/native_dialogs/plugin.cfg", "res://addons/notes_tab/plugin.cfg" )
 
 [gui]
 
