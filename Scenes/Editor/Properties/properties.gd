@@ -2,31 +2,36 @@ extends VBoxContainer
 
 # Signals
 signal open_file_pressed(object, filter)
+signal file_size_warning
 
 # Nodes:
-onready var view_prop := $ScrollBox/VLayout/ViewProp
-onready var screen_prop := $ScrollBox/VLayout/ScreenProp
-onready var background_prop := $ScrollBox/VLayout/BackgroundProp
-onready var atlas_prop := $ScrollBox/VLayout/AtlasProp
-onready var widget_prop := $ScrollBox/VLayout/WidgetProp
-onready var scroll_box := $ScrollBox
+onready var ViewProp := $ScrollBox/VLayout/ViewProp
+onready var ScreenProp := $ScrollBox/VLayout/ScreenProp
+onready var BackgroundProp := $ScrollBox/VLayout/BackgroundProp
+onready var AtlasProp := $ScrollBox/VLayout/AtlasProp
+onready var WidgetProp := $ScrollBox/VLayout/WidgetProp
+onready var ScrollBox := $ScrollBox
 
 
 func _ready():
-	scroll_box.scroll_vertical = 0
+	ScrollBox.scroll_vertical = 0
 
 
 func load_requirements(viewer : Viewer):
-	view_prop.camera = viewer.camera
-	view_prop.emit_signal("node_recieved")
-	screen_prop.screen = viewer.screen
-	screen_prop.viewbox = viewer.viewbox
-	screen_prop.emit_signal("node_recieved")
-	background_prop.display = viewer.display
-	background_prop.emit_signal("node_recieved")
-	atlas_prop.display = viewer.display
-	atlas_prop.emit_signal("node_recieved")
+	ViewProp.camera = viewer.camera
+	ViewProp.emit_signal("node_recieved")
+	ScreenProp.screen = viewer.screen
+	ScreenProp.viewbox = viewer.viewbox
+	ScreenProp.emit_signal("node_recieved")
+	BackgroundProp.DisplayNode = viewer.display
+	BackgroundProp.emit_signal("node_recieved")
+	AtlasProp.DisplayNode = viewer.display
+	AtlasProp.emit_signal("node_recieved")
 
 
 func _on_open_file_pressed(object, filter):
 	emit_signal("open_file_pressed", object, filter)
+
+
+func _on_file_size_warning():
+	emit_signal("file_size_warning")

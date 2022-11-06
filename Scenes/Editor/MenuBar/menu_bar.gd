@@ -5,6 +5,7 @@ signal new_file_pressed
 signal open_file_pressed
 signal export_file_pressed
 signal save_pressed
+signal return_pressed
 
 
 func _on_File_item_pressed(id):
@@ -21,3 +22,7 @@ func _on_Edit_item_pressed(_id):
 
 func _on_Help_item_pressed(_id):
 	pass # Replace with function body.
+
+
+func _on_Return_pressed():
+	emit_signal("return_pressed")
