@@ -6,8 +6,8 @@ extends PanelContainer
 # When opening, 
 
 # CS-objects
-var zipper_script = load("res://Scripts/zipper.cs")
-onready var Zipper = zipper_script.new()
+var zipper_script = preload("res://Scripts/Zipper.cs")
+var Zipper = zipper_script.new()
 
 # Nodes:
 onready var ViewerNode := $Docker/Viewer
@@ -28,8 +28,20 @@ var _last_focused
 func _ready():
 	OS.min_window_size = _min_window_size
 	Properties.load_requirements(ViewerNode)
-	
+	var zipPath = "C:\\Users\\Nif\\Downloads\\TestCompress\\Test.fvd"
+#	Zipper.WriteTextFile(zipPath, "Config.json", "{\"TITLE\":\"Omkei~!\"}", true, false)
+#	Zipper.CreateEmpty("C:\\Users\\Nif\\Downloads\\TestCompress", "uwu.fvd")
+#	print(Zipper.ReadTextFile(zipPath, "fkmylyf.json"))
+#	Zipper.AppendFile(zipPath, "F:\\Sub\\Pictures\\Picture1.png", "apple", ".png", false)
 #	Zipper.Zip("C:\\Users\\Nif\\Downloads\\TestCompress\\File", "C:\\Users\\Nif\\Downloads\\TestCompress", "Test.fvd")
+
+#	var imageTextureDictionary = Zipper.CollectTextureImages(zipPath)
+#	for key in imageTextureDictionary:
+#		print(key)
+	
+#	Zipper.DisposeFile(zipPath, "apple3.png")
+#	print(Zipper.GrabConfigFile("C:\\Users\\Nif\\Downloads\\TestCompress\\Test.fvd"))
+	
 #	Zipper.Unzip("C:\\Users\\Nif\\Downloads\\TestCompress\\Test.fvd", "C:\\Users\\Nif\\Downloads\\TestCompress\\Extracted")
 
 

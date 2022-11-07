@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/Editor/Properties/properties.gd" type="Script" id=2]
 [ext_resource path="res://addons/dockable_container/dockable_container.gd" type="Script" id=3]
 [ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Editor/MenuBar/MenuBar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Icons/Material/white_48dp/arrow_back_ios_new_white_18dp.svg" type="Texture" id=5]
 [ext_resource path="res://Scenes/Editor/Properties/screen_prop.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Fonts/GoogleSans/GoogleSans-Regular.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Scenes/Editor/Properties/project_prop.gd" type="Script" id=8]
@@ -134,10 +134,20 @@ tab_align = 0
 tabs_visible = false
 layout = SubResource( 36 )
 
-[node name="MenuBar" parent="Docker" instance=ExtResource( 5 )]
+[node name="MenuBar" type="PanelContainer" parent="Docker"]
 margin_top = 0.5
 margin_right = 1024.0
 margin_bottom = 41.5
+
+[node name="Return" type="Button" parent="Docker/MenuBar"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 89.0
+margin_bottom = 34.0
+size_flags_horizontal = 0
+text = "Return"
+icon = ExtResource( 5 )
+align = 0
 
 [node name="Viewer" type="PanelContainer" parent="Docker"]
 margin_top = 42.5
@@ -309,18 +319,27 @@ margin_bottom = 32.0
 alignment = 1
 
 [node name="Save" type="Button" parent="Docker/Properties/ScrollBox/VLayout/ProjectProp/VLaout/Buttons/HLayout"]
-margin_right = 122.0
+margin_right = 120.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 text = "Save"
 script = ExtResource( 28 )
 
-[node name="Export" type="Button" parent="Docker/Properties/ScrollBox/VLayout/ProjectProp/VLaout/Buttons/HLayout"]
-margin_left = 126.0
+[node name="Open" type="Button" parent="Docker/Properties/ScrollBox/VLayout/ProjectProp/VLaout/Buttons/HLayout"]
+margin_left = 124.0
+margin_right = 184.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+text = "Open"
+script = ExtResource( 28 )
+
+[node name="New" type="Button" parent="Docker/Properties/ScrollBox/VLayout/ProjectProp/VLaout/Buttons/HLayout"]
+margin_left = 188.0
 margin_right = 249.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
-text = "Export"
+text = "New"
 script = ExtResource( 28 )
 
 [node name="ViewProp" type="PanelContainer" parent="Docker/Properties/ScrollBox/VLayout"]
@@ -762,6 +781,11 @@ Image file size is beyond the recommended 3MB.
 Allowed upload size is only 10MB"
 align = 1
 valign = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+margin_right = 1024.0
+margin_bottom = 600.0
 
 [connection signal="file_size_warning" from="Docker/Properties" to="." method="_on_Properties_file_size_warning"]
 [connection signal="open_file_pressed" from="Docker/Properties" to="." method="_on_Properties_open_file_pressed"]

@@ -24,10 +24,9 @@ icon = ExtResource( 3 )
 align = 0
 
 [node name="File" type="MenuButton" parent="HFrame"]
-visible = false
-margin_left = 74.0
-margin_right = 109.0
-margin_bottom = 20.0
+margin_left = 78.0
+margin_right = 113.0
+margin_bottom = 24.0
 focus_mode = 2
 text = "File"
 items = [ "New File", null, 0, false, false, 0, 0, null, "", false, "Open File...", null, 0, false, false, 1, 0, null, "", false, "Export File...", null, 0, false, false, 2, 0, null, "", false, "Save", null, 0, false, false, 3, 0, null, "", false ]

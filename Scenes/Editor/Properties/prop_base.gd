@@ -7,4 +7,5 @@ signal node_recieved
 signal file_size_warning
 
 # Private
-export var _texture_file_filter := ["*.png, *.jpg, *.jpeg, *.svg ; Supported Images", "*.jpg ; JPG Images", "*.jpeg ; JPEG Images", "*.png ; PNG Images", "*.svg ; SVG Images"]
+export var _texture_file_filter := ["*.png, *.jpg, *.jpeg ; Supported Images", "*.jpg ; JPG Images", "*.jpeg ; JPEG Images", "*.png ; PNG Images"]
+export var _image_file_filter := ["*.png, *.jpg, *.jpeg, *.svg ; Supported Images", "*.jpg ; JPG Images", "*.jpeg ; JPEG Images", "*.png ; PNG Images", "*.svg ; SVG Images"]
