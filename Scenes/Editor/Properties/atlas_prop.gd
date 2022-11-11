@@ -15,20 +15,41 @@ onready var PlayButton := $VLayout/PlayButton
 #var atlas_player # AtlasPlayer type; Unable to set due to Godot inconsistency with set_custom_type()
 var DisplayNode : Display
 
+# Private:
+var _texture_name := ""
+var _loaded_texture : Texture = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ShortLib.set_script_all([HFrameEdit, VFrameEdit, StartFrameEdit, EndFrameEdit, SpeedEdit], StrictSpinBox)
-	StartFrameEdit.max_value = (HFrameEdit.value * VFrameEdit.value)
-	EndFrameEdit.max_value = (HFrameEdit.value * VFrameEdit.value)
+	_update_max_frame()
 	yield(self, "node_recieved") # Ensures that screen is loaded first before running code below
 	_setup_atlas_player()
 	# warning-ignore:RETURN_VALUE_DISCARDED
 	DisplayNode.connect_atlas_player("stopped", self, "_on_AtlasPlayer_stopped")
 
+func _update_max_frame():
+	StartFrameEdit.max_value = (HFrameEdit.value * VFrameEdit.value)
+	EndFrameEdit.max_value = (HFrameEdit.value * VFrameEdit.value)
 
-func _setup_atlas_player(emitted_ready:bool=false):
-	DisplayNode.set_atlas_texture(ShortLib.load_texture(TextureEdit.text, emitted_ready))
+
+func reset():
+	PlayButton.pressed = false
+	TextureEdit.text = ""
+	HFrameEdit.value = 1
+	VFrameEdit.value = 1
+	StartFrameEdit.value = 1
+	EndFrameEdit.min_value = 1
+	EndFrameEdit.value = 1
+	_update_max_frame()
+	SpeedEdit.value = 1
+	LoopCheck.pressed = true
+	_setup_atlas_player(true)
+
+
+func _setup_atlas_player(emitted_ready:bool=false, skip_texture:bool=false):
+	if !skip_texture:
+		DisplayNode.set_atlas_texture(ShortLib.load_texture(TextureEdit.text, emitted_ready))
 	DisplayNode.set_hframe(HFrameEdit.value)
 	DisplayNode.set_vframe(VFrameEdit.value)
 	DisplayNode.set_start_frame(StartFrameEdit.value)
@@ -38,19 +59,51 @@ func _setup_atlas_player(emitted_ready:bool=false):
 
 
 func set_data(data:Dictionary):
-	TextureEdit.text = data["texture"]
-	HFrameEdit.value = data["hframe"]
-	VFrameEdit.value = data["vframe"]
-	StartFrameEdit.value = data["start_frame"]
-	EndFrameEdit.value = data["end_frame"]
-	SpeedEdit.value = data["speed"]
-	LoopCheck.pressed = data["loop"]
-	_setup_atlas_player(true) 
+	reset()
+	if data.has("texture_name") and data.has("texture"):
+		TextureEdit.text = data["texture_name"]
+		_texture_name = data["texture_name"]
+		DisplayNode.set_atlas_texture(data["texture"])
+		_loaded_texture = data["texture"]
+	if data.has("hframe"):
+		HFrameEdit.value = data["hframe"]
+	if data.has("vframe"):
+		VFrameEdit.value = data["vframe"]
+	_update_max_frame()
+	if data.has("start_frame"):
+		StartFrameEdit.value = data["start_frame"]
+		EndFrameEdit.min_value = data["start_frame"]
+	if data.has("end_frame"):
+		EndFrameEdit.value = data["end_frame"]
+	if data.has("speed"):
+		SpeedEdit.value = data["speed"]
+	if data.has("loop"):
+		LoopCheck.pressed = data["loop"]
+	_setup_atlas_player(true, true) 
 
 
-func get_data():
+func get_data(temp_dir:String, is_save:bool=false, new_save:bool=false, save_file:String="") -> Dictionary:
+	var file_name = _texture_name
+	if DisplayNode.get_atlas_texture() != null and DisplayNode.get_atlas_texture() != _loaded_texture:
+		var image_extension := ShortLib.get_file_extension(TextureEdit.text)
+		file_name = "sprite_image"+image_extension
+		if is_save and !image_extension.empty():
+			if new_save:
+				var dir = Directory.new()
+				var copy_err = dir.copy(TextureEdit.text, temp_dir+"/"+file_name)
+				if copy_err != OK:
+					push_error(SAVE_ERR_COPY_FILE % [TextureEdit.text, temp_dir, copy_err])
+			elif !save_file.empty():
+				Zipper.AppendFile(save_file, TextureEdit.text, file_name, true, true)
+				_loaded_texture = null
+			_texture_name = file_name
+	elif !new_save and !save_file.empty():
+		if TextureEdit.text != _texture_name:
+			Zipper.DisposeFile(save_file, "sprite_image"+ShortLib.get_file_extension(_texture_name))
+			_texture_name = ""
+			_loaded_texture = null
 	return {
-		"texture":TextureEdit.text,
+		"texture":file_name,
 		"hframe":HFrameEdit.value,
 		"vframe":VFrameEdit.value,
 		"start_frame":StartFrameEdit.value,
@@ -68,6 +121,8 @@ func _on_TextureEdit_text_changed(text):
 	if texture != null:
 		DisplayNode.set_atlas_texture(texture)
 		PlayButton.disabled = false
+	elif !_texture_name.empty() and _loaded_texture != null and text == _texture_name:
+		DisplayNode.set_atlas_texture(_loaded_texture)
 	else:
 		DisplayNode.set_atlas_texture(null)
 		PlayButton.disabled = true
@@ -85,14 +140,12 @@ func set_selected_file(path):
 
 func _on_HFrameEdit_value_changed(value):
 	DisplayNode.set_hframe(value)
-	StartFrameEdit.max_value = (HFrameEdit.value * VFrameEdit.value)
-	EndFrameEdit.max_value = (HFrameEdit.value * VFrameEdit.value)
+	_update_max_frame()
 
 
 func _on_VFrameEdit_value_changed(value):
 	DisplayNode.set_vframe(value)
-	StartFrameEdit.max_value = (HFrameEdit.value * VFrameEdit.value)
-	EndFrameEdit.max_value = (HFrameEdit.value * VFrameEdit.value)
+	_update_max_frame()
 
 
 func _on_StartFrameEdit_value_changed(value):

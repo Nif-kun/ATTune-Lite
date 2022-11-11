@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/timestamp_grabber.svg-ed267c87c29a123226f5e5a6a94331c1.stex"
+path="res://.import/timestamp_grabber.svg-f809b0a1318f275b7d4ffdb763eef3fa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icons/Material/custom/timestamp_grabber.svg"
-dest_files=[ "res://.import/timestamp_grabber.svg-ed267c87c29a123226f5e5a6a94331c1.stex" ]
+source_file="res://assets/icons/material/custom/timestamp_grabber.svg"
+dest_files=[ "res://.import/timestamp_grabber.svg-f809b0a1318f275b7d4ffdb763eef3fa.stex" ]
 
 [params]
 

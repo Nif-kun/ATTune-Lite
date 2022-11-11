@@ -12,67 +12,77 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "CameraDrag2D",
 "language": "GDScript",
-"path": "res://Library/NuiLib/2D/camera_drag_2d.gd"
+"path": "res://library/nui_lib/2D/camera_drag_2d.gd"
 }, {
 "base": "Reference",
 "class": "CameraSlide2D",
 "language": "GDScript",
-"path": "res://Library/NuiLib/2D/camera_slide_2d.gd"
+"path": "res://library/nui_lib/2D/camera_slide_2d.gd"
 }, {
 "base": "Reference",
 "class": "CameraZoom2D",
 "language": "GDScript",
-"path": "res://Library/NuiLib/2D/camera_zoom_2d.gd"
+"path": "res://library/nui_lib/2D/camera_zoom_2d.gd"
 }, {
 "base": "PanelContainer",
 "class": "Display",
 "language": "GDScript",
-"path": "res://Scenes/Player/Display/display.gd"
+"path": "res://scenes/player/display/display.gd"
 }, {
 "base": "Camera2D",
 "class": "DisplayCamera",
 "language": "GDScript",
-"path": "res://Scenes/Editor/Viewer/camera.gd"
+"path": "res://scenes/editor/viewer/camera.gd"
+}, {
+"base": "PanelContainer",
+"class": "Editor",
+"language": "GDScript",
+"path": "res://scenes/editor/editor.gd"
+}, {
+"base": "PanelContainer",
+"class": "EditorWeb",
+"language": "GDScript",
+"path": "res://scenes/editor/editor_web.gd"
 }, {
 "base": "StrictFocusButton",
 "class": "IconButton",
 "language": "GDScript",
-"path": "res://Scripts/icon_button.gd"
+"path": "res://scripts/icon_button.gd"
 }, {
 "base": "PanelContainer",
 "class": "Notif",
 "language": "GDScript",
-"path": "res://Scripts/notif.gd"
+"path": "res://scripts/notif.gd"
 }, {
 "base": "PanelContainer",
 "class": "PropBase",
 "language": "GDScript",
-"path": "res://Scenes/Editor/Properties/prop_base.gd"
+"path": "res://scenes/editor/properties/prop_base.gd"
 }, {
 "base": "Reference",
 "class": "ShortLib",
 "language": "GDScript",
-"path": "res://Library/short_lib.gd"
+"path": "res://library/short_lib.gd"
 }, {
 "base": "Button",
 "class": "StrictFocusButton",
 "language": "GDScript",
-"path": "res://Scripts/strict_focus_button.gd"
+"path": "res://scripts/strict_focus_button.gd"
 }, {
 "base": "SpinBox",
 "class": "StrictSpinBox",
 "language": "GDScript",
-"path": "res://Scripts/strict_spinbox.gd"
+"path": "res://scripts/strict_spinbox.gd"
 }, {
 "base": "LineEdit",
 "class": "SubtleLineEdit",
 "language": "GDScript",
-"path": "res://Scripts/subtle_line_edit.gd"
+"path": "res://scripts/subtle_line_edit.gd"
 }, {
 "base": "PanelContainer",
 "class": "Viewer",
 "language": "GDScript",
-"path": "res://Scenes/Editor/Viewer/viewer.gd"
+"path": "res://scenes/editor/viewer/viewer.gd"
 } ]
 _global_script_class_icons={
 "CameraDrag2D": "",
@@ -80,6 +90,8 @@ _global_script_class_icons={
 "CameraZoom2D": "",
 "Display": "",
 "DisplayCamera": "",
+"Editor": "",
+"EditorWeb": "",
 "IconButton": "",
 "Notif": "",
 "PropBase": "",
@@ -92,13 +104,19 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ATTune Lite"
-run/main_scene="res://Scenes/Editor/Editor.tscn"
+config/name="Atune"
+run/main_scene="res://scenes/Atune.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="FeelVibes"
+boot_splash/image="res://icon.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.121569, 0.113725, 0.129412, 1 )
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
-SceneHandler="*res://Scripts/scene_handler.gd"
+SceneHandler="*res://scripts/scene_handler.gd"
 
 [display]
 
@@ -106,11 +124,12 @@ window/dpi/allow_hidpi=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/AtlasPlayer/plugin.cfg", "res://addons/FlexContainer/plugin.cfg", "res://addons/dockable_container/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/native_dialogs/plugin.cfg", "res://addons/notes_tab/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/atlas_player/plugin.cfg", "res://addons/dockable_container/plugin.cfg", "res://addons/flex_container/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/native_dialogs/plugin.cfg" )
 
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+theme/use_hidpi=true
 
 [input]
 
@@ -137,12 +156,8 @@ zoom_out={
 
 [mono]
 
-project/assembly_name="ATTune Lite"
+project/assembly_name="ATTune"
 
 [physics]
 
 common/enable_pause_aware_picking=true
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/brush_white_filled_48dp.svg-2f7f873def2e45ffc9634dd9fc149ffb.stex"
+path="res://.import/brush_white_filled_48dp.svg-c3022c773854fcbf5e1a64e9c0f800e7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icons/Material/white_48dp/brush_white_filled_48dp.svg"
-dest_files=[ "res://.import/brush_white_filled_48dp.svg-2f7f873def2e45ffc9634dd9fc149ffb.stex" ]
+source_file="res://assets/icons/material/white_48dp/brush_white_filled_48dp.svg"
+dest_files=[ "res://.import/brush_white_filled_48dp.svg-c3022c773854fcbf5e1a64e9c0f800e7.stex" ]
 
 [params]
 

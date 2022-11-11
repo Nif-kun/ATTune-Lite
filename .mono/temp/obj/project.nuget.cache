@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5ErATEUavBA0IowKsT5Ol7fL920XKS3OfrSkrr68zj2mv3efdWwwRwPh9aertM+5+mms6tyu5igGoQjhEhYJyQ==",
+  "dgSpecHash": "qcLQwgxxZttF+5o386oC7UPb5Gdww1sSV/EsEfxCu6oo+HISSsH+vf14nmt8pqVgIA9p1rYG7e/tqvgdqGc1cw==",
   "success": true,
-  "projectFilePath": "F:\\Programming\\AppDev\\Projects\\ATTune-Lite\\ATTune Lite.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Nif\\.nuget\\packages\\system.io.compression\\4.3.0\\system.io.compression.4.3.0.nupkg.sha512"
-  ],
+  "projectFilePath": "F:\\Programming\\AppDev\\Projects\\attune\\ATTune.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

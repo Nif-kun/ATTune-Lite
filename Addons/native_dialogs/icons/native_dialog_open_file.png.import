@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/native_dialog_open_file.png-f5a4bdaf1a9049e3d3e569c17d0643ff.stex"
+path="res://.import/native_dialog_open_file.png-94d31b95f481d556dcb2679a4986fc3e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Addons/native_dialogs/icons/native_dialog_open_file.png"
-dest_files=[ "res://.import/native_dialog_open_file.png-f5a4bdaf1a9049e3d3e569c17d0643ff.stex" ]
+source_file="res://addons/native_dialogs/icons/native_dialog_open_file.png"
+dest_files=[ "res://.import/native_dialog_open_file.png-94d31b95f481d556dcb2679a4986fc3e.stex" ]
 
 [params]
 

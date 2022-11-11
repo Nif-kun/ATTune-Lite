@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/music_note_white_48dp.svg-81dffb0b6118e8635227958abe1999b8.stex"
+path="res://.import/music_note_white_48dp.svg-f1347c5d88e4b205ae46424bd77e90e9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icons/Material/white_48dp/music_note_white_48dp.svg"
-dest_files=[ "res://.import/music_note_white_48dp.svg-81dffb0b6118e8635227958abe1999b8.stex" ]
+source_file="res://assets/icons/material/white_48dp/music_note_white_48dp.svg"
+dest_files=[ "res://.import/music_note_white_48dp.svg-f1347c5d88e4b205ae46424bd77e90e9.stex" ]
 
 [params]
 

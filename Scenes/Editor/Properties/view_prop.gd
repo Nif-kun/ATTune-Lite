@@ -5,6 +5,9 @@ extends PropBase
 onready var _zoom_edit := $VLayout/ZoomEdit/SpinBox
 var camera : DisplayCamera
 
+# Private
+var _default_zoom := 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,6 +17,11 @@ func _ready():
 	camera.connect("zooming", self, "_on_Camera_zooming")
 	_zoom_edit.step = camera.zoom_rate * 100
 	_zoom_edit.min_value = _zoom_edit.step
+	_default_zoom = _zoom_edit.value
+
+
+func reset():
+	_zoom_edit.value = _default_zoom
 
 
 func _on_Zoom_value_changed(value):

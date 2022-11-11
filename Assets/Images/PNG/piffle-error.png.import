@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/piffle-error.png-ae2744c155889ecc83495dcc1fca03d2.stex"
+path="res://.import/piffle-error.png-85dda2908512fb8924dfd5fcc6f4c945.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/PNG/piffle-error.png"
-dest_files=[ "res://.import/piffle-error.png-ae2744c155889ecc83495dcc1fca03d2.stex" ]
+source_file="res://assets/images/png/piffle-error.png"
+dest_files=[ "res://.import/piffle-error.png-85dda2908512fb8924dfd5fcc6f4c945.stex" ]
 
 [params]
 

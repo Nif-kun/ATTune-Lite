@@ -1,110 +1,124 @@
 extends PanelContainer
-
-
-# Next objective:
-# Save it as json then zip it with images. If a better option exist, that'll be nice
-# When opening, 
-
-# CS-objects
-var zipper_script = preload("res://Scripts/Zipper.cs")
-var Zipper = zipper_script.new()
+class_name Editor
 
 # Nodes:
 onready var ViewerNode := $Docker/Viewer
 onready var Properties := $Docker/Properties
-onready var OpenFileDialog := $NativeDialogOpenFile
+onready var NativeOpenFileDialog := $NativeDialogs/OpenFile
+onready var NativeSaveFileDialog := $NativeDialogs/SaveFile
 onready var UILock := $UILock
 onready var SizeWarning := $Notifs/Margin/HLayout/SizeWarning
 
-# Private var:
+# Paths
+var base_dir := OS.get_user_data_dir()
+var temp_dir := base_dir+"/"+"temp"
+export var config_file := "fvd_config.json"
+export var project_extension := ".fvd"
+
+# Private 
 export var _editor_version := "1.0"
 export var _min_window_size := Vector2(545,393)
 var _data_buffer := {}
 var _event_object
 var _last_focused
+var _save_path := ""
+var _opening_save := false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	OS.min_window_size = _min_window_size
 	Properties.load_requirements(ViewerNode)
-	var zipPath = "C:\\Users\\Nif\\Downloads\\TestCompress\\Test.fvd"
-#	Zipper.WriteTextFile(zipPath, "Config.json", "{\"TITLE\":\"Omkei~!\"}", true, false)
-#	Zipper.CreateEmpty("C:\\Users\\Nif\\Downloads\\TestCompress", "uwu.fvd")
-#	print(Zipper.ReadTextFile(zipPath, "fkmylyf.json"))
-#	Zipper.AppendFile(zipPath, "F:\\Sub\\Pictures\\Picture1.png", "apple", ".png", false)
-#	Zipper.Zip("C:\\Users\\Nif\\Downloads\\TestCompress\\File", "C:\\Users\\Nif\\Downloads\\TestCompress", "Test.fvd")
-
-#	var imageTextureDictionary = Zipper.CollectTextureImages(zipPath)
-#	for key in imageTextureDictionary:
-#		print(key)
 	
-#	Zipper.DisposeFile(zipPath, "apple3.png")
-#	print(Zipper.GrabConfigFile("C:\\Users\\Nif\\Downloads\\TestCompress\\Test.fvd"))
+	# Creates temp directory
+	var dir := Directory.new()
+	if !dir.dir_exists(temp_dir):
+		# warning-ignore:return_value_discarded
+		dir.make_dir(temp_dir)
+	var dir_files = ShortLib.get_dir_files(temp_dir)
+	for files in dir_files:
+		# warning-ignore:return_value_discarded
+		dir.remove(temp_dir+"/"+files)
 	
-#	Zipper.Unzip("C:\\Users\\Nif\\Downloads\\TestCompress\\Test.fvd", "C:\\Users\\Nif\\Downloads\\TestCompress\\Extracted")
+	NativeOpenFileDialog.connect("files_selected", self, "_on_OpenFile_files_selected")
+	NativeSaveFileDialog.connect("file_selected", self, "_on_SaveFile_file_selected")
 
 
-func save_project():
-	var data = {
-		"editor_ver":_editor_version,
-		"project_name":"",
-		"author":"",
-		"icon_path":"",
-		"background":{},
-		"sprite":{}
-		}
-	data["project_name"] = "tester" # not yet implemented
-	data["background"] = Properties.background_prop.get_data()
-	data["sprite"] = Properties.atlas_prop.get_data()
-	_data_buffer = data # data buffer to be removed when json file path added to direct save
-	print(data)
-
-
-# Note: make a func that checks the dictionary for missing key and add them with default val.
-func load_project():
-	# data_buffer to be removed when json file path added to directly load from save file
-	Properties.background_prop.set_data(_data_buffer["background"])
-	Properties.atlas_prop.set_data(_data_buffer["sprite"])
-
-# DEPRECATED USE AS REFERENCE
-func _on_MenuBar_save_pressed():
-	save_project()
-
-# DEPRECATED USE AS REFERENCE
-func _on_MenuBar_open_file_pressed():
-	OpenFileDialog.show()
-	UILock.visible = true
-
-
-func _on_Properties_open_file_pressed(object, filter):
-	_event_object = object
-	OpenFileDialog.title = "Select an Image File"
-	OpenFileDialog.filters = filter
+func _lock_ui():
 	UILock.visible = true
 	_last_focused = get_focus_owner()
 	UILock.grab_focus()
-	OpenFileDialog.show()
+
+func _unlock_ui():
+	UILock.visible = false
+	if _last_focused != null:
+		_last_focused.grab_focus()
+		_last_focused = null
+
+
+func _on_Properties_save_project_pressed():
+	if _save_path.empty():
+		_lock_ui()
+		NativeSaveFileDialog.filters = ["*.fvd ; Feelvibes Design (.fvd)"]
+		NativeSaveFileDialog.show()
+	else:
+		Properties.save_data(temp_dir, config_file, _save_path, false)
+
+
+func _on_Properties_open_project_pressed():
+	_lock_ui()
+	_opening_save = true
+	NativeOpenFileDialog.title = "Open save file from directory"
+	NativeOpenFileDialog.filters = ["*.fvd ; Feelvibes Design (.fvd)"]
+	NativeOpenFileDialog.show() 
+
+
+func _on_Properties_new_project_pressed():
+	_save_path = ""
+	_opening_save = false
+	Properties.reset()
+
+
+func _on_Properties_open_file_pressed(object, filter):
+	_lock_ui()
+	_event_object = object
+	NativeOpenFileDialog.title = "Select an image file"
+	NativeOpenFileDialog.filters = filter
+	NativeOpenFileDialog.show()
 
 
 func _on_Properties_file_size_warning():
 	SizeWarning.popup()
 
 
-func _on_NativeDialogOpenFile_files_selected(files):
-	UILock.visible = false
-	if _last_focused != null:
-		_last_focused.grab_focus()
-		_last_focused = null
-	# Checks if object event came from Properties tab.
-	if _event_object is PropBase and _event_object.has_method("set_selected_file"):
+func _on_OpenFile_files_selected(files):
+	# Handles how to handle array of files or singular one.
+	# NativeDialog gives array while GodotDialog only gives a singluar path.
+	var file_path = ""
+	if files is PoolStringArray:
 		if !files.empty():
-			_event_object.set_selected_file(files[0])
-	_event_object = null
+			file_path = files[0]
+	else:
+		file_path = files
+	
+	_unlock_ui()
+	
+	if _event_object != null:
+		# Checks if object event came from Properties tab.
+		if _event_object is PropBase and _event_object.has_method("set_selected_file"):
+			_event_object.set_selected_file(file_path)
+		_event_object = null
+	
+	if _opening_save:
+		if Directory.new().file_exists(file_path):
+			Properties.load_data(file_path, config_file)
+			_save_path = file_path
+		_opening_save = false
 
-# DEPRECATED USE AS REFERENCE
-func _on_MenuBar_new_file_pressed():
-	load_project()
 
-
-
+func _on_SaveFile_file_selected(file):
+	UILock.visible = false
+	if !file.empty():
+		var extension = ShortLib.get_file_extension(file) # Gets overwritten extension.
+		Properties.save_data(temp_dir, temp_dir+"/"+config_file, file.trim_suffix(extension)+project_extension)
+		_save_path = file.trim_suffix(extension)+project_extension

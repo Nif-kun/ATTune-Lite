@@ -3,13 +3,22 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Drawing.Imaging;
+using System.Collections.Generic;
 
 public class Zipper : Godot.Object
 {
-	public static void Zip(String filePath, String zipPath, String zipName) 
+
+	public static void Zip(String filePath, String zipPathFull, bool overwrite = true, bool deleteDirectoryContent = false)
 	{
-		string zipPathFull = zipPath +"\\"+zipName;
+		if (overwrite && System.IO.File.Exists(zipPathFull))
+		{
+			System.IO.File.Delete(zipPathFull);
+		}
 		ZipFile.CreateFromDirectory(filePath, zipPathFull);
+		if (deleteDirectoryContent)
+		{
+			Array.ForEach(System.IO.Directory.GetFiles(filePath), System.IO.File.Delete);
+		}
 	}
 
 	public static void Unzip(String zipPath, String extractPath) 
@@ -17,12 +26,7 @@ public class Zipper : Godot.Object
 		ZipFile.ExtractToDirectory(zipPath, extractPath);
 	}
 
-	public static void CreateEmpty(String filePath, String zipName) 
-	{
-		ZipFile.CreateFromDirectory(filePath, zipName);
-	}
-
-	public static void WriteTextFile(String zipPath, String fullName, String newText, bool overwrite = true, bool create = false) 
+	public static void WriteTextFile(String zipPath, String fullName, String newText, bool overwrite = true, bool create = true) 
 	{
 		using ZipArchive zipFile = ZipFile.Open(zipPath, ZipArchiveMode.Update);
 		if (zipFile.GetEntry(fullName) != null && !overwrite)
@@ -30,12 +34,12 @@ public class Zipper : Godot.Object
 			using StreamWriter streamWriter = new(zipFile.GetEntry(fullName).Open());
 			streamWriter.BaseStream.Seek(0, SeekOrigin.End);
 			streamWriter.WriteLine(newText);
-        }
-        else
-        {
+		}
+		else
+		{
 			if (zipFile.GetEntry(fullName) != null && overwrite)
 				zipFile.GetEntry(fullName).Delete();
-			if (create) 
+			if (create || overwrite) 
 			{
 				zipFile.CreateEntry(fullName);
 				using StreamWriter streamWriter = new(zipFile.GetEntry(fullName).Open());
@@ -45,10 +49,10 @@ public class Zipper : Godot.Object
 	}
 
 	public static string ReadTextFile(String zipPath, String fullName)
-    {
+	{
 		using ZipArchive zipFile = ZipFile.OpenRead(zipPath);
-        if (zipFile.GetEntry(fullName) != null)
-        {
+		if (zipFile.GetEntry(fullName) != null)
+		{
 			ZipArchiveEntry entry = zipFile.GetEntry(fullName);
 			using StreamReader streamReader = new(entry.Open());
 			return streamReader.ReadToEnd();
@@ -88,39 +92,56 @@ public class Zipper : Godot.Object
 					imageTextureDictionary.Add(entry.FullName, imageTexture);
 				}
 			}
-            if (imageTextureDictionary.Count > 0)
-            {
+			if (imageTextureDictionary.Count > 0)
+			{
 				return imageTextureDictionary;
-            }
+			}
 		}
 		return null;
 	}
 
 
-	public static void AppendFile(String zipPath, String filePath, String name, String fileType, bool stackSameName = false) 
+	public static void AppendFile(String zipPath, String filePath, String fullName, bool overwrite = true, bool disregardType = false)
 	{
 		using ZipArchive zipFile = ZipFile.Open(zipPath, ZipArchiveMode.Update);
-		Random random = new();
-		int num = random.Next();
-		while (!stackSameName)
-        {
-			if (zipFile.GetEntry(name + num.ToString() + fileType) == null)
+		string name = fullName.Substring(0, fullName.LastIndexOf("."));
+		if (overwrite)
+		{
+			if (disregardType)
 			{
-				break;
+				List<string> sameNameList = new();
+				foreach (ZipArchiveEntry entry in zipFile.Entries) // Cannot delete directly as it can cause modify exception
+				{
+					if (entry.FullName.Substring(0, entry.FullName.LastIndexOf(".")) == name)
+					{
+						sameNameList.Add(entry.FullName);
+					}
+				}
+				foreach (string sameName in sameNameList)
+				{
+					if (zipFile.GetEntry(sameName) != null)
+						zipFile.GetEntry(sameName).Delete();
+				}
 			}
 			else
-				num++;
+			{
+				zipFile.GetEntry(fullName).Delete();
+			}
+			zipFile.CreateEntryFromFile(filePath, fullName);
 		}
-		zipFile.CreateEntryFromFile(filePath,name+num.ToString()+fileType);
+		else if (zipFile.GetEntry(fullName) == null)
+		{
+			zipFile.CreateEntryFromFile(filePath, fullName);
+		}
 	}
 
 
 	public static void DisposeFile(String zipPath, String fullName)
 	{
-        using ZipArchive zipFile = ZipFile.Open(zipPath, ZipArchiveMode.Update);
-        if (zipFile.GetEntry(fullName) != null)
-        {
+		using ZipArchive zipFile = ZipFile.Open(zipPath, ZipArchiveMode.Update);
+		if (zipFile.GetEntry(fullName) != null)
+		{
 			zipFile.GetEntry(fullName).Delete();
 		}
-    }
+	}
 }

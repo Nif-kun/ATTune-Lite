@@ -1,9 +1,0 @@
-F:\Programming\AppDev\Projects\ATTune-Lite\.mono\temp\bin\Debug\ATTune Lite.dll
-F:\Programming\AppDev\Projects\ATTune-Lite\.mono\temp\bin\Debug\ATTune Lite.pdb
-F:\Programming\AppDev\Projects\ATTune-Lite\.mono\temp\obj\Debug\ATTune Lite.csproj.AssemblyReference.cache
-F:\Programming\AppDev\Projects\ATTune-Lite\.mono\temp\obj\Debug\ATTune Lite.GeneratedMSBuildEditorConfig.editorconfig
-F:\Programming\AppDev\Projects\ATTune-Lite\.mono\temp\obj\Debug\ATTune Lite.AssemblyInfoInputs.cache
-F:\Programming\AppDev\Projects\ATTune-Lite\.mono\temp\obj\Debug\ATTune Lite.AssemblyInfo.cs
-F:\Programming\AppDev\Projects\ATTune-Lite\.mono\temp\obj\Debug\ATTune Lite.csproj.CoreCompileInputs.cache
-F:\Programming\AppDev\Projects\ATTune-Lite\.mono\temp\obj\Debug\ATTune Lite.dll
-F:\Programming\AppDev\Projects\ATTune-Lite\.mono\temp\obj\Debug\ATTune Lite.pdb

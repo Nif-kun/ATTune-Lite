@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/beemo.png-2259bdbab51c2421aab02e471efaa80f.stex"
+path="res://.import/beemo.png-4744a795875906588d1d87a11dfa7611.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/PNG/beemo.png"
-dest_files=[ "res://.import/beemo.png-2259bdbab51c2421aab02e471efaa80f.stex" ]
+source_file="res://assets/images/png/beemo.png"
+dest_files=[ "res://.import/beemo.png-4744a795875906588d1d87a11dfa7611.stex" ]
 
 [params]
 

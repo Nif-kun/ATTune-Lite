@@ -1,14 +1,15 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Assets/Icons/Material/custom/timestamp_grabber.svg" type="Texture" id=1]
-[ext_resource path="res://Assets/Icons/Material/custom/timestamp_grabber_empty.svg" type="Texture" id=2]
-[ext_resource path="res://Assets/Fonts/GoogleSans/GoogleSans-Regular.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Assets/Icons/Material/white_48dp/shuffle_white_48dp.svg" type="Texture" id=4]
-[ext_resource path="res://Assets/Icons/Material/white_48dp/skip_next_white_48dp.svg" type="Texture" id=5]
-[ext_resource path="res://Assets/Icons/Material/white_48dp/skip_previous_white_48dp.svg" type="Texture" id=6]
-[ext_resource path="res://Assets/Icons/Material/white_48dp/pause_circle_white_48dp.svg" type="Texture" id=7]
-[ext_resource path="res://Assets/Icons/Material/white_48dp/play_circle_white_48dp.svg" type="Texture" id=8]
-[ext_resource path="res://Assets/Icons/Material/white_48dp/repeat_white_48dp.svg" type="Texture" id=9]
+[ext_resource path="res://assets/icons/material/custom/timestamp_grabber.svg" type="Texture" id=1]
+[ext_resource path="res://assets/icons/material/custom/timestamp_grabber_empty.svg" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/GoogleSans/GoogleSans-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/icons/material/white_48dp/shuffle_white_48dp.svg" type="Texture" id=4]
+[ext_resource path="res://assets/icons/material/white_48dp/skip_next_white_48dp.svg" type="Texture" id=5]
+[ext_resource path="res://assets/icons/material/white_48dp/skip_previous_white_48dp.svg" type="Texture" id=6]
+[ext_resource path="res://assets/icons/material/white_48dp/pause_circle_white_48dp.svg" type="Texture" id=7]
+[ext_resource path="res://assets/icons/material/white_48dp/play_circle_white_48dp.svg" type="Texture" id=8]
+[ext_resource path="res://assets/icons/material/white_48dp/repeat_white_48dp.svg" type="Texture" id=9]
+
 
 [sub_resource type="DynamicFont" id=47]
 font_data = ExtResource( 3 )

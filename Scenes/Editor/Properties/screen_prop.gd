@@ -13,6 +13,8 @@ var viewbox : ViewportContainer
 
 
 # Private var:
+var _default_width := 0
+var _default_height := 0
 enum SizePreset {
 	CUSTOM = 0,
 	
@@ -30,6 +32,13 @@ func _ready():
 	_height_edit.set_min(screen.rect_min_size.y)
 	_width_edit.set_value(screen.rect_size.x)
 	_height_edit.set_value(screen.rect_size.y)
+	_default_width = screen.rect_size.x
+	_default_height = screen.rect_size.y
+
+
+func reset():
+	_width_edit.set_value(_default_width)
+	_height_edit.set_value(_default_height)
 
 
 func _on_WidthEdit_value_changed(value):
