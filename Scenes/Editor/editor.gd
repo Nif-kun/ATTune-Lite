@@ -36,11 +36,10 @@ func _ready():
 		# warning-ignore:return_value_discarded
 		dir.make_dir(temp_dir)
 	var dir_files = ShortLib.get_dir_files(temp_dir)
-	for files in dir_files:
-		# warning-ignore:return_value_discarded
-		dir.remove(temp_dir+"/"+files)
-	
+	ShortLib.remove_files(dir_files, temp_dir)
+	# warning-ignore:return_value_discarded
 	NativeOpenFileDialog.connect("files_selected", self, "_on_OpenFile_files_selected")
+	# warning-ignore:return_value_discarded
 	NativeSaveFileDialog.connect("file_selected", self, "_on_SaveFile_file_selected")
 
 

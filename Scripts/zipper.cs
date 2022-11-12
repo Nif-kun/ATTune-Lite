@@ -1,32 +1,33 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Drawing.Imaging;
-using System.Collections.Generic;
+using DotFile = System.IO.File;
+using DotImage = System.Drawing.Image;
 
 public class Zipper : Godot.Object
 {
 
 	public static void Zip(String filePath, String zipPathFull, bool overwrite = true, bool deleteDirectoryContent = false)
 	{
-		if (overwrite && System.IO.File.Exists(zipPathFull))
+		if (overwrite && DotFile.Exists(zipPathFull))
 		{
-			System.IO.File.Delete(zipPathFull);
+			DotFile.Delete(zipPathFull);
 		}
 		ZipFile.CreateFromDirectory(filePath, zipPathFull);
 		if (deleteDirectoryContent)
 		{
-			Array.ForEach(System.IO.Directory.GetFiles(filePath), System.IO.File.Delete);
+			Array.ForEach(System.IO.Directory.GetFiles(filePath), DotFile.Delete);
 		}
 	}
 
-	public static void Unzip(String zipPath, String extractPath) 
+	public static void Unzip(String zipPath, String extractPath)
 	{
 		ZipFile.ExtractToDirectory(zipPath, extractPath);
 	}
 
-	public static void WriteTextFile(String zipPath, String fullName, String newText, bool overwrite = true, bool create = true) 
+	public static void WriteTextFile(String zipPath, String fullName, String newText, bool overwrite = true, bool create = true)
 	{
 		using ZipArchive zipFile = ZipFile.Open(zipPath, ZipArchiveMode.Update);
 		if (zipFile.GetEntry(fullName) != null && !overwrite)
@@ -39,7 +40,7 @@ public class Zipper : Godot.Object
 		{
 			if (zipFile.GetEntry(fullName) != null && overwrite)
 				zipFile.GetEntry(fullName).Delete();
-			if (create || overwrite) 
+			if (create || overwrite)
 			{
 				zipFile.CreateEntry(fullName);
 				using StreamWriter streamWriter = new(zipFile.GetEntry(fullName).Open());
@@ -60,7 +61,7 @@ public class Zipper : Godot.Object
 		return null;
 	}
 
-	public static Godot.Collections.Dictionary<string,ImageTexture> CollectTextureImages(String zipPath)
+	public static Godot.Collections.Dictionary<string, ImageTexture> CollectTextureImages(String zipPath)
 	{
 		Godot.Collections.Dictionary<string, ImageTexture> imageTextureDictionary = new();
 		using (ZipArchive zipFile = ZipFile.OpenRead(zipPath)) 
@@ -69,22 +70,22 @@ public class Zipper : Godot.Object
 			{
 				bool isPng = entry.FullName.EndsWith(".png", StringComparison.OrdinalIgnoreCase);
 				bool isJpg = entry.FullName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) || entry.FullName.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase);
-				Godot.Image godotImage = new();
-				Godot.ImageTexture imageTexture = new();
-				if (isPng || isJpg) 
+				Image godotImage = new();
+				ImageTexture imageTexture = new();
+				if (isPng || isJpg)
 				{
-					using MemoryStream memoryStream = new();
-					using Stream stream = entry.Open();
-					using System.Drawing.Image image = System.Drawing.Image.FromStream(stream);
+					MemoryStream memoryStream = new();
+					Stream stream = entry.Open();
+					DotImage dotImage = DotImage.FromStream(stream);
 					if (isPng)
 					{
-						image.Save(memoryStream, ImageFormat.Png);
+						dotImage.Save(memoryStream, dotImage.RawFormat);
 						memoryStream.Position = 0;
 						godotImage.LoadPngFromBuffer(memoryStream.ToArray());
 					}
-					else 
+					else
 					{
-						image.Save(memoryStream, ImageFormat.Jpeg);
+						dotImage.Save(memoryStream, dotImage.RawFormat);
 						memoryStream.Position = 0;
 						godotImage.LoadJpgFromBuffer(memoryStream.ToArray());
 					}
@@ -119,8 +120,7 @@ public class Zipper : Godot.Object
 				}
 				foreach (string sameName in sameNameList)
 				{
-					if (zipFile.GetEntry(sameName) != null)
-						zipFile.GetEntry(sameName).Delete();
+					zipFile.GetEntry(sameName)?.Delete();
 				}
 			}
 			else
@@ -139,9 +139,6 @@ public class Zipper : Godot.Object
 	public static void DisposeFile(String zipPath, String fullName)
 	{
 		using ZipArchive zipFile = ZipFile.Open(zipPath, ZipArchiveMode.Update);
-		if (zipFile.GetEntry(fullName) != null)
-		{
-			zipFile.GetEntry(fullName).Delete();
-		}
+		zipFile.GetEntry(fullName)?.Delete();
 	}
 }
