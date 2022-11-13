@@ -12,8 +12,8 @@ onready var SizeWarning := $Notifs/Margin/HLayout/SizeWarning
 # Paths
 var base_dir := OS.get_user_data_dir()
 var temp_dir := base_dir+"/"+"temp"
-export var config_file := "fvd_config.json"
-export var project_extension := ".fvd"
+export var config_file := "attp_config.json"
+export var project_extension := ".attp"
 
 # Private 
 export var _editor_version := "1.0"

@@ -19,9 +19,9 @@ var base_dir := OS.get_user_data_dir()
 var temp_dir := base_dir+"/"+"temp"
 var image_temp_dir := base_dir+"/"+"image_temp"
 var project_temp_dir := base_dir+"/"+"project_temp"
-export var save_file_name := "save"
-export var config_file := "fvd_config.json"
-export var project_extension := ".fvd"
+export var save_file_name := "attune_design"
+export var config_file := "attp_config.json"
+export var project_extension := ".attp"
 
 # Private 
 export var _editor_version := "1.0"

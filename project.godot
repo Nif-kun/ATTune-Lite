@@ -104,7 +104,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="FeelVibes - Editor"
+config/name="Attune"
 run/main_scene="res://scenes/Attune.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="Attune"
